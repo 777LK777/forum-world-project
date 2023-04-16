@@ -9,6 +9,7 @@ networks:
 volumes:
   postgres:
   prisma:
+  web:
 
 services:
 
@@ -68,7 +69,7 @@ services:
         - FW_CORE_PORT=${FW_CORE_PORT}
         - DATABASE_URL=${DATABASE_URL}
     volumes:
-      - .:/forum-world-core/app
+      - web:/forum-world-core/app
       - /forum-world-core/app/node_modules
     ports:
       - "${FW_CORE_PORT}:${FW_CORE_PORT}"
@@ -86,11 +87,13 @@ services:
       args:
         - FW_GATEWAY_PORT=${FW_GATEWAY_PORT}
         - FW_UI_PORT=${FW_UI_PORT}
+        - FW_CORE_ORIGIN=${FW_CORE_ORIGIN}
     volumes:
-      - .:/forum-world-gateway
+      - web:/forum-world-gateway
       - /forum-world-gateway/app/node_modules
     ports:
       - "${FW_GATEWAY_PORT}:${FW_GATEWAY_PORT}"
+      - "192.168.100.24:8080:${FW_GATEWAY_PORT}"
     depends_on:
       - forum-world-core
     command: npm run ${GATEWAY_RUN_CMD}
@@ -104,7 +107,7 @@ services:
     build:
       context: ./forum-world-ui
     volumes:
-      - .:/forum-world-ui
+      - web:/forum-world-ui
       - /forum-world-ui/app/node_modules
     ports:
       - "${FW_UI_PORT}:${FW_UI_PORT}"

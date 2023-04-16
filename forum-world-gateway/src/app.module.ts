@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
-import { CoreApiModule } from './core-api/core-api.module';
+
+import { CoreModule } from './core-api/core.module';
 
 @Module({
-  imports: [CoreApiModule],
+  imports: [
+    CoreModule
+  ],
 })
 export class AppModule {}
