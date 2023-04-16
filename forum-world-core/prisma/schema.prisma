@@ -12,7 +12,14 @@ datasource db {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    userId            String    @id @default(cuid())
     name          String?
     email         String?   @unique
+}
+
+model Country {
+  countryId  Int @id @default(autoincrement())
+  name String
+  pathFragment String @unique
+  flagImageUrl String @default("")
 }
