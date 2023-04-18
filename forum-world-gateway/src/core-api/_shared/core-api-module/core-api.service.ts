@@ -47,9 +47,9 @@ export class CoreApiService implements OnApplicationBootstrap {
             );
         }
       
-        delete<T>(url: string, data?, config?): Observable<AxiosResponse<T>> {
+        delete<T>(url: string, config?): Observable<AxiosResponse<T>> {
           const path = `${this.apiOrigin}${this.pathFragment}${url}`;
-          return this.httpService.delete<T>(`${path}`, data).pipe(
+          return this.httpService.delete<T>(`${path}`, config).pipe(
             catchError((error: AxiosError) => {
                 console.log(`delete method to ${path} was throw error:\r${error}`)
                 return new Observable<AxiosResponse<T>>()
