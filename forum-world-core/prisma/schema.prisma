@@ -23,3 +23,9 @@ model Country {
   pathFragment String @unique
   flagImageUrl String @default("")
 }
+
+model Theme {
+  themeId Int @id @default(autoincrement())
+  name String
+  pathFragment String @unique
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CountriesRepository } from './repository/countries.repository';
+import { CountriesRepository } from './repositories/countries.repository';
 import { CountryDto } from './dto/country-dto';
 import { CreateCountryDto } from './dto/create-country-dto';
 
