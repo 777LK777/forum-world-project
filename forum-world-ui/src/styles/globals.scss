@@ -1,0 +1,17 @@
+@import './vars.scss';
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+ul, li {
+    list-style: none;
+}
+
+html, body {
+    font-family: $mainFont;
+    font-size: 10px;
+}
+

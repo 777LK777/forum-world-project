@@ -1,0 +1,69 @@
+@import '../../../styles/vars.scss';
+
+.main {
+    padding: 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    @media only screen and ($tablet) {
+        font-size: 5rem;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    & button {
+        width: 140px;
+        background-color: $bgAddBtn;
+        &:hover {
+            background-color: $bgAddBtnHover;
+        }
+    }
+}
+
+.list {
+    display: flex;
+    flex-direction: column-reverse;
+    & :first-of-type div {
+        border-bottom: 1px solid black;
+    }
+    & :nth-child(odd) div {
+        background: $bgTableLigthGrey;
+    }
+}
+
+.listTitle {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: -1px;
+    & div {
+        padding: .3rem;
+        font-size: 1.4rem;
+        text-align: center;
+        line-height: 30px;
+        border: 1px solid black;
+        border-right: none;
+        width: 120px;
+        height: 36px;
+        overflow: hidden;
+        background-color: $bgTableGrey;
+    }
+}
+.url {
+    display: none;
+    @media screen and ($tablet) {
+        display: block;
+    }
+}
+
+.flag {
+    max-width: 70px;
+    height: 36px;
+    border-right: 1px solid black !important;
+}

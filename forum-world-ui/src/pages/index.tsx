@@ -9,11 +9,11 @@ export default function Home() {
 
   return (
     <>
-     { isError && <p className="text-center text-red-600">Something went wrong...</p> }
+     { isError && <p>Something went wrong...</p> }
     <ul>
-      { isLoading && <p className="text-center">Loading...</p> }    
-      {data?.map(user => 
-        <li key={user.id}>{user.name} <span>{user.email}</span></li>
+      { isLoading && <p>Loading...</p> }    
+      {data?.map((user, index) => 
+        <li key={index}>{user.name} <span>{user.email}</span></li>
       )}
     </ul>
     </>
