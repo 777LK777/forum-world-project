@@ -17,6 +17,7 @@ import { openUpdateCountry, closeUpdateCountry } from '@/store/admin/countries/s
 
 import { useAppDispatch, useAppSelector } from '@/pages/hooks/_shared/redux';
 import { closeDeleteModal, resetDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
+import AdminSidebar from '@/components/admin/countries/AdminSidebar/AdminSidebar';
 
 const Countries = () => {
 
@@ -84,54 +85,82 @@ const Countries = () => {
     }
   };
 
+  const [hamburgerOpened, setHamburgerOpened] = useState(false)
+  
+  const hamburgerHandle = () => {
+    if (window.innerWidth < 768) setHamburgerOpened(!hamburgerOpened);
+  }
+
   return (
     <>
     <>{ isOpen && (<UpdateCountryModal />) }</>
     <>{ isDeleteModalOpen && window.innerWidth > 1024 && (<DeleteConfirmModal message={"Вы хотите удалить страну?"}/>) }</>
-    <div className={classes.main}>
-    <h1 className={classes.title}>Добавление страны</h1>
-    <form className={classes.form}>
-      <AppInput 
-          placeholder="Add country name" 
-          value={nameValue} 
-          onChange={(e: any) => setNameValue(e.target.value)} 
-      />
-      <AppInput
-        placeholder="Add country flagURL"
-        value={flagValue}
-        onChange={(e: any) => setFlagValue(e.target.value)}
-      />
-      <AppInput 
-          placeholder="Add country path" 
-          value={pathValue} 
-          onChange={(e: any) => setPathValue(e.target.value)} 
-      />
-      <AppButton children="Добавить страну" onClick={addCountryHandle} />
-    </form>
-    {
-      (data && data.length > 0) ? 
-        <li className={classes.listTitle}>
-          <div>Страна</div>
-          <div>Путь</div>
-          <div className={classes.url}>URL флага</div>
-          <div className={classes.flag}>Флаг</div>
-        </li>
-        : null
-    }
+    <div>
+      <div onClick={hamburgerHandle} className={classes.hamburger__container}>
+        {
+          hamburgerOpened ? 
+            <div className={classes.close}>
+              <span className={classes.close__line}></span>
+              <span className={classes.close__line}></span>
+            </div>
+          : 
+            <div className={classes.hamburger}>
+              <span className={classes.hamburger__line}></span>
+              <span className={classes.hamburger__line}></span>
+              <span className={classes.hamburger__line}></span>
+            </div>
+        }
+      </div>
 
-    <ul className={classes.list}>
-      {
-        data?.map((country) => (
-        <>
-          <CountryItem 
-            country={country} 
-            onUpdateCountryStart={() => handleUpdateCountry(country)}
-            onDeleteCountryFinish={() => {}}
+      
+      <AdminSidebar open={hamburgerOpened}/>
+      <div className={classes.main}>
+        <h1 className={classes.title}>Добавление/изменение стран</h1>
+        <form className={classes.form}>
+          <AppInput 
+              placeholder="Add country name" 
+              value={nameValue} 
+              onChange={(e: any) => setNameValue(e.target.value)} 
           />
-        </>
-      ))}
-    </ul>
-  </div>
+          <AppInput
+            placeholder="Add country flagURL"
+            value={flagValue}
+            onChange={(e: any) => setFlagValue(e.target.value)}
+          />
+          <AppInput 
+              placeholder="Add country path" 
+              value={pathValue} 
+              onChange={(e: any) => setPathValue(e.target.value)} 
+          />
+          <AppButton children="Добавить страну" onClick={addCountryHandle} />
+        </form>
+        {
+          (data && data.length > 0) ? 
+            <li className={classes.listTitle}>
+              <div>Страна</div>
+              <div>Путь</div>
+              <div className={classes.url}>URL флага</div>
+              <div className={classes.flag}>Флаг</div>
+            </li>
+            : null
+        }
+
+        <ul className={classes.list}>
+          {
+            data?.map((country) => (
+            <>
+              <CountryItem
+                key={country.id}
+                country={country} 
+                onUpdateCountryStart={() => handleUpdateCountry(country)}
+                onDeleteCountryFinish={() => {}}
+              />
+            </>
+          ))}
+        </ul>
+      </div>
+    </div>
+
     </>
   );
 };

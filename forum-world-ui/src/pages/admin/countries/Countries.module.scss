@@ -2,6 +2,9 @@
 
 .main {
     padding: 2rem;
+    @media ($tablet) {
+        margin-left: 27rem;
+    }
 }
 
 .title {
@@ -66,4 +69,84 @@
     max-width: 70px;
     height: 36px;
     border-right: 1px solid black !important;
+}
+
+// .hamburger {
+//     position: fixed;
+//     top: 2.6rem; 
+//     right: 2rem;
+//     z-index: 3;
+//     @media screen and ($tablet) {
+//         display: none;
+//     }
+// }
+
+.hamburger__container {
+    position: fixed;
+    top: 2.6rem; 
+    right: 2rem;
+    z-index: 2;
+    @media screen and ($tablet) {
+        display: none;
+    }
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    &__line {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background-color: #000;
+        margin: 3px 0;
+
+        &:first-child {
+        margin-top: 0;
+        }
+
+        &:last-child {
+        margin-bottom: 0;
+        }
+    }
+}
+
+.close {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+
+  &__line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: #000;
+    margin: -1px 0;
+    transform-origin: center;
+    transition: transform 0.2s ease-in-out;
+
+    &:first-child {
+      transform: rotate(45deg);
+    }
+
+    &:last-child {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &:hover {
+    &__line {
+      transform: scale(1.2);
+    }
+  }
 }

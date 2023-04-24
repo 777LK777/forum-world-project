@@ -1,0 +1,41 @@
+@import '@/styles/vars.scss';
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgb(224, 224, 224);
+    width: 25rem;
+    height: 100vh;
+    padding: 2rem;
+    display: none;
+    @media ($tablet) {
+        display: block;
+    }
+}
+
+.open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 2.5rem 3rem;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}
+.item {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
