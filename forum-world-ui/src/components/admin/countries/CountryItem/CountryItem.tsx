@@ -69,7 +69,6 @@ const CountryItem: React.FC<ICountryItemProps> = ({ country, onUpdateCountryStar
     <li
       className={`${classes.items} ${deleteAnimation && classes.deleteAnimation}`}
       {...bind()}
-      key={country.id}
     >
       <div className={classes.item}>{country.name}</div>
       <div className={classes.item}>{country.pathFragment}</div>
