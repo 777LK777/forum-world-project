@@ -1,0 +1,108 @@
+@import '@/styles/vars.scss';
+
+.items {
+    display: flex;
+    align-items: center;
+}
+.item {
+    padding: .3rem;
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid black;
+    border-right: none;
+    border-bottom: none;
+    width: 120px;
+    height: 36px;
+    overflow: hidden;
+}
+
+
+.url {
+    display: none;
+    @media screen and ($tablet) {
+        display: block;
+    }
+}
+.flagImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .1rem;
+    border: 1px solid black;
+    border-bottom: none;
+    width: 70px;
+    height: 36px;
+    & img {
+        object-fit: contain;
+        height: 90%;
+        &[alt]:hover:after {
+            content: "Измените ссылку на изображение";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            background-color: #000;
+            color: #fff;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 10px 0;
+        }
+    }
+
+}
+.delete {
+    display: none;
+    margin-left: .3rem;
+    background-color: $bgDeleteButtonColor;
+    color: white;
+    border: none;
+    padding: 7px 7px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    @media screen and ($desktop) {
+        display: block;
+    }
+}
+  
+.delete:hover {
+    background-color: $bgDeleteButtonHoverColor;
+}
+
+.deleteAnimation {
+    animation-name: slideOut;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes slideOut {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+}
+  
+.change {
+    display: none;
+    margin-left: .3rem;
+    background-color: $bgChangeBtn;
+    color: white;
+    border: none;
+    padding: 7px 7px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    @media screen and ($desktop) {
+        display: block;
+    }
+}
+  
+.change:hover {
+    background-color: $bgChangeBtnHover;
+}

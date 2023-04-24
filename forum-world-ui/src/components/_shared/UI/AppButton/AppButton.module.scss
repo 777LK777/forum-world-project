@@ -1,0 +1,26 @@
+@import '@/styles/vars.scss';
+
+.button {
+  font-size: 1.4rem;
+  text-align: center;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: $bgButtonColor;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: $bgButtonHoverColor;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+
+
+
+  

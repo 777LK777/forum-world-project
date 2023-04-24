@@ -1,0 +1,24 @@
+@import '@/styles/vars.scss';
+
+.input {
+    max-width: 60rem;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    background-color: white;
+    color: black;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    
+    &:focus {
+      outline: none;
+      border-color: $bgButtonColor;
+      box-shadow: 0 0 0 1px $bgButtonHoverColor
+    }
+    
+    &::placeholder {
+      color: #6c757d;
+    }
+}
+  

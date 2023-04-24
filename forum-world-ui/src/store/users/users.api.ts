@@ -4,7 +4,7 @@ import { IUser } from '../../models/IUser'
 export const usersApi = createApi({
     reducerPath: 'users/api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:4000/api/'
+        baseUrl: 'http://192.168.100.23:4000/api/'
     }),
     endpoints: build => ({
         getAllUsers: build.query<IUser[], void>({

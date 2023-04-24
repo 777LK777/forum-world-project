@@ -1,0 +1,70 @@
+@import '@/styles/vars.scss';
+
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+  
+.modal {
+    background-color: #fff !important;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+.modalMessage {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: none !important;
+    background-color: #fff !important;
+}
+  
+.modalButtons {
+    display: flex;
+    justify-content: center;
+    border: none !important;
+    background-color: #fff !important;
+}
+  
+.modalCancelButton {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+  
+.modalCancelButton:hover {
+    background-color: #999;
+}
+  
+.modalConfirmButton {
+    background-color: $bgDeleteButtonColor;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+  
+.modalConfirmButton:hover {
+    background-color: $bgDeleteButtonHoverColor;
+}
+  

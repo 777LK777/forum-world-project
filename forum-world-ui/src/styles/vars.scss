@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+$mainFont: "Roboto";
+
+$bgButtonColor: #555;
+$bgButtonHoverColor: #666;
+$bgTableGrey: #999;
+$bgTableLigthGrey: #e6e6e6;
+$bgAddBtn: #2ecc71;
+$bgAddBtnHover: #27ae60;
+$bgDeleteButtonColor: #ff4136;
+$bgDeleteButtonHoverColor: #851f19;
+$bgChangeBtn: #f2c744;
+$bgChangeBtnHover: #e5b241;
+
+//screens
+$tablet: 'min-width: 767px';
+$desktop: 'min-width: 1024px';
