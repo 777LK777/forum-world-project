@@ -5,13 +5,19 @@ import { countriesApi } from "./admin/countries/countries.api";
 import countriesPageSlice from "../store/admin/countries/slices/countriesPageSlice";
 import updateCountryModalSlice from "./admin/countries/slices/updateCountryModalSlice";
 import deleteModalSlice from './admin/countries/slices/deleteConfirmModal'
+import { themesApi } from "./admin/themes/themes.api";
+import themesPageSlice from "./admin/themes/slices/themesPageSlice";
+import updateThemeModalSlice from "./admin/themes/slices/updateThemeModalSlice";
 
 const rootReducer = combineReducers({
     [usersApi.reducerPath]: usersApi.reducer,
     countriesPageSlice,
     updateCountryModalSlice,
     deleteModalSlice,
-    [countriesApi.reducerPath]: countriesApi.reducer
+    [countriesApi.reducerPath]: countriesApi.reducer,
+    [themesApi.reducerPath] : themesApi.reducer,
+    themesPageSlice, 
+    updateThemeModalSlice
 })
 
 export const store = configureStore({
@@ -19,6 +25,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
         .concat(usersApi.middleware)
         .concat(countriesApi.middleware)
+        .concat(themesApi.middleware)
 })
 
 export type RootState = ReturnType<typeof rootReducer>
