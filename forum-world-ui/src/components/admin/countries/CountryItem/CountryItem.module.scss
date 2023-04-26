@@ -87,6 +87,44 @@
       opacity: 0;
     }
 }
+
+.deleteAnimation {
+    animation-name: slideOut;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes slideOut {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+}
+
+.updateAnimation {
+    animation-name: slideOutUpdate;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes slideOutUpdate {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(50%);
+      opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
   
 .change {
     display: none;

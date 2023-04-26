@@ -19,7 +19,7 @@ interface ICountryItemProps {
   onDeleteCountryFinish: MouseEventHandler<HTMLButtonElement>;
 }
 
-const CountryItem: React.FC<ICountryItemProps> = ({ country, onUpdateCountryStart, onDeleteCountryFinish }) => {
+const CountryItem: React.FC<ICountryItemProps> = ({ country, onUpdateCountryStart, onDeleteCountryFinish}) => {
 
   const dispatch = useAppDispatch();
 
@@ -66,8 +66,9 @@ const CountryItem: React.FC<ICountryItemProps> = ({ country, onUpdateCountryStar
   }
 
   return (
-    <li
-      className={`${classes.items} ${deleteAnimation && classes.deleteAnimation}`}
+    <div
+      key={country.id}
+      className={`${classes.items} ${deleteAnimation && classes.deleteAnimation} ${updateAnimation && classes.updateAnimation}`}
       {...bind()}
     >
       <div className={classes.item}>{country.name}</div>
@@ -84,7 +85,7 @@ const CountryItem: React.FC<ICountryItemProps> = ({ country, onUpdateCountryStar
       <button onClick={handleOnChangeCountryClick(country)} className={classes.change}>
         Изменить
       </button>
-    </li>
+    </div>
   );
 };
 

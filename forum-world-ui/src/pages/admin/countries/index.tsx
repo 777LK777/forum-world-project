@@ -115,7 +115,7 @@ const Countries = () => {
       
       <AdminSidebar open={hamburgerOpened}/>
       <div className={classes.main}>
-        <h1 className={classes.title}>Добавление/изменение стран</h1>
+        <h1 className={classes.title}>Управление странами</h1>
         <form className={classes.form}>
           <AppInput 
               placeholder="Add country name" 
@@ -145,19 +145,18 @@ const Countries = () => {
             : null
         }
 
-        <ul className={classes.list}>
+        <div className={classes.list}>
           {
             data?.map((country) => (
             <>
               <CountryItem
-                key={country.id}
                 country={country} 
                 onUpdateCountryStart={() => handleUpdateCountry(country)}
                 onDeleteCountryFinish={() => {}}
               />
             </>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
 

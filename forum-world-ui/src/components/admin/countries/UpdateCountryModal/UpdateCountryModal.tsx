@@ -32,13 +32,22 @@ const UpdateCountryModal = () => {
           <div className={classes.modalMessage}>
             <p>Страна:</p>
             <input
+              className={classes.input}
               placeholder={country?.name}
               onChange={e => handleSetName(e.target.value)}
             />
             <p>Путь:</p>
-            <input placeholder={country?.pathFragment} onChange={e => handleSetPthFragment(e.target.value)}/>
+            <input 
+              className={classes.input}
+              placeholder={country?.pathFragment} 
+              onChange={e => handleSetPthFragment(e.target.value)}
+            />
             <p>URL изображения:</p>
-            <input placeholder={country?.flagImageUrl} onChange={e => handleSetFlagImageUrl(e.target.value)}/>
+            <input 
+              className={classes.input}
+              placeholder={country?.flagImageUrl} 
+              onChange={e => handleSetFlagImageUrl(e.target.value)}
+            />
             <img src={country?.flagImageUrl} height={36} width={70}/>
           </div>
           <div className={classes.modalButtons}>
