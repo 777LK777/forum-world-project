@@ -7,40 +7,32 @@ import {
 } from '@/store/admin/countries/countries.api';
 
 import UpdateCountryModal from '../../../components/admin/countries/UpdateCountryModal/UpdateCountryModal';
-import DeleteConfirmModal from '../../../components/admin/countries/DeleteConfirmModal/DeleteConfirmModal';
+import DeleteConfirmModal from '../../../components/_shared/DeleteConfirmModal/DeleteConfirmModal';
 import classes from './Countries.module.scss';
 import AppButton from '../../../components/_shared/UI/AppButton/AppButton';
 import AppInput from '../../../components/_shared/UI/AppInput/AppInput';
-import CountryItem from '../../../components/admin/countries/CountryItem/CountryItem';
-import { ICountry } from '@/models/ICountry';
-import { openUpdateCountry, closeUpdateCountry } from '@/store/admin/countries/slices/updateCountryModalSlice'
+import { closeUpdateCountry } from '@/store/admin/countries/slices/updateCountryModalSlice'
 
 import { useAppDispatch, useAppSelector } from '@/pages/hooks/_shared/redux';
 import { closeDeleteModal, resetDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
 import AdminSidebar from '@/components/admin/countries/AdminSidebar/AdminSidebar';
+import CountriesList from '@/components/admin/countries/CountriesList/CountriesList';
 
 const Countries = () => {
 
   const { data } = useGetAllCountriesQuery();
   const [createCountry] = useCreateCountryMutation();
-  const [updateCountry] = useChangeCountryMutation();
   const [deleteCountry] = useDeleteCountryMutation();
+  const [updateCountry] = useChangeCountryMutation();
   
+  const [nameValue, setNameValue] = useState('');
+  const [flagValue, setFlagValue] = useState('');
+  const [pathValue, setPathValue] = useState('');
+
   const dispatch = useAppDispatch();
   const { countryToUpdate, countryToDelete } = useAppSelector(state => state.countriesPageSlice) 
-  const { isOpen, country: selectedCountryToUpdate } = useAppSelector(state => state.updateCountryModalSlice)
+  const { isOpen } = useAppSelector(state => state.updateCountryModalSlice)
   const { isOpen: isDeleteModalOpen, isDeleteSelected } = useAppSelector(state => state.deleteModalSlice)
-
-  const handleUpdateCountry = (country?: ICountry) => {    
-    if (country === undefined) return;
-    dispatch(openUpdateCountry(country))
-  };
-
-  useEffect(() => {
-    dispatch(closeUpdateCountry())
-    if (!countryToUpdate) return;
-    updateCountry(countryToUpdate)
-  }, [countryToUpdate])
 
   useEffect(() => {
     dispatch(closeDeleteModal())
@@ -49,11 +41,6 @@ const Countries = () => {
     deleteCountry(countryToDelete.id);
     dispatch(resetDeleteModal());
   }, [isDeleteSelected])
-
-
-  const [nameValue, setNameValue] = useState('');
-  const [flagValue, setFlagValue] = useState('');
-  const [pathValue, setPathValue] = useState('');
 
 
   const addCountryHandle = async (e: any) => {
@@ -85,8 +72,13 @@ const Countries = () => {
     }
   };
 
+  useEffect(() => {
+    dispatch(closeUpdateCountry());
+    if (!countryToUpdate) return;
+    updateCountry(countryToUpdate);
+  }, [countryToUpdate])
+
   const [hamburgerOpened, setHamburgerOpened] = useState(false)
-  
   const hamburgerHandle = () => {
     if (window.innerWidth < 768) setHamburgerOpened(!hamburgerOpened);
   }
@@ -135,28 +127,10 @@ const Countries = () => {
           <AppButton children="Добавить страну" onClick={addCountryHandle} />
         </form>
         {
-          (data && data.length > 0) ? 
-            <li className={classes.listTitle}>
-              <div>Страна</div>
-              <div>Путь</div>
-              <div className={classes.url}>URL флага</div>
-              <div className={classes.flag}>Флаг</div>
-            </li>
-            : null
+          (data! && data.length!) > 0 ? (
+            <CountriesList data={data}/>
+          ) : null
         }
-
-        <div className={classes.list}>
-          {
-            data?.map((country) => (
-            <>
-              <CountryItem
-                country={country} 
-                onUpdateCountryStart={() => handleUpdateCountry(country)}
-                onDeleteCountryFinish={() => {}}
-              />
-            </>
-          ))}
-        </div>
       </div>
     </div>
 

@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/admin/countries/CountryItem/CountryItem.tsx", "src/components/admin/countries/AdminSidebar/AdminSidebar.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/admin/countries/CountryItem/CountryItem.tsx", "src/components/admin/countries/AdminSidebar/AdminSidebar.jsx", "src/components/admin/countries/CountriesList/CountriesList.jsx"],
   "exclude": ["node_modules"]
 }

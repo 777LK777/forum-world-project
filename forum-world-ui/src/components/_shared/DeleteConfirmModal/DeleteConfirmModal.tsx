@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useAppDispatch } from '@/pages/hooks/_shared/redux';
-import { closeDeleteModal, isDeleteConfirm } from '../../../../store/admin/countries/slices/deleteConfirmModal'
+import { closeDeleteModal, isDeleteConfirm } from '../../../store/admin/countries/slices/deleteConfirmModal'
 
 import classes from './DeleteConfirmModal.module.scss';
 
