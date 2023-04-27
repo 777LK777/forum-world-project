@@ -6,7 +6,7 @@ import AppButton from '@/components/_shared/UI/AppButton/AppButton';
 import { useChangeThemeMutation, useCreateThemeMutation, useDeleteThemeMutation, useGetAllThemesQuery } from '@/store/admin/themes/themes.api';
 import ThemesList from '../../../components/admin/themes/ThemesList/ThemesList';
 import { useAppDispatch, useAppSelector } from '@/pages/hooks/_shared/redux';
-import DeleteConfirmModal from '@/components/admin/countries/DeleteConfirmModal/DeleteConfirmModal';
+import DeleteConfirmModal from '@/components/_shared/DeleteConfirmModal/DeleteConfirmModal';
 import { closeDeleteModal, resetDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
 import { closeUpdateTheme } from '@/store/admin/themes/slices/updateThemeModalSlice';
 import UpdateThemeModal from '@/components/admin/themes/UpdateThemeModal/UpdateThemeModal';
@@ -23,7 +23,7 @@ const Themes = () => {
     const dispatch = useAppDispatch();
     const {themeToDelete, themeToUpdate} = useAppSelector(state => state.themesPageSlice);
     const { isOpen: isDeleteModalOpen, isDeleteSelected } = useAppSelector(state => state.deleteModalSlice);
-    const { isOpen, theme: selectedThemeToUpdate } = useAppSelector(state => state.updateThemeModalSlice)
+    const { isOpen } = useAppSelector(state => state.updateThemeModalSlice)
 
 
     useEffect(() => {

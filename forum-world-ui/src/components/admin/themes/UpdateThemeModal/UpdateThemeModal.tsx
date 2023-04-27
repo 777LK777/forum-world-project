@@ -32,12 +32,14 @@ const UpdateThemeModal = () => {
               className={classes.input}
               placeholder={theme?.name}
               onChange={e => handleSetName(e.target.value)}
+              value={name}
             />
             <p>Путь:</p>
             <input 
               className={classes.input}
               placeholder={theme?.pathFragment} 
               onChange={e => handleSetPthFragment(e.target.value)}
+              value={pathFragment}
             />
           </div>
           <div className={classes.modalButtons}>

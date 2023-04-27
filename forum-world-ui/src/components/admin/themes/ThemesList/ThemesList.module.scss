@@ -42,3 +42,30 @@
         cursor: pointer;
     }
 } 
+
+.tr.deleted {
+    animation: slide-out-right 0.3s forwards;
+}
+  
+.tr.updated {
+    animation: slide-out-left 0.3s forwards;
+}
+
+@keyframes slide-out-right {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+}
+  
+@keyframes slide-out-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+}
+  
