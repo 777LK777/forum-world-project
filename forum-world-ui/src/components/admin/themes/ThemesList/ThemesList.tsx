@@ -8,11 +8,11 @@ import { ITheme } from '@/models/ITheme';
 import { useGesture } from 'react-use-gesture';
 import { openUpdateTheme } from '@/store/admin/themes/slices/updateThemeModalSlice';
 
-interface IThemeItemProps {
+interface IThemesListProps {
   data: ITheme[] | undefined;
 }
 
-const ThemesList: React.FC<IThemeItemProps> = ( { data } ) => {
+const ThemesList: React.FC<IThemesListProps> = ( { data } ) => {
 
   const dispatch = useAppDispatch();
 
@@ -28,7 +28,7 @@ const ThemesList: React.FC<IThemeItemProps> = ( { data } ) => {
       if (state.swipe[0] < 0 && currentThemeRef.current) {
         if (!currentThemeRef.current?.id) return;
         setTimeout(() => {
-          if (!currentThemeRef?.current) return
+          if (!currentThemeRef?.current) return;
           dispatch(setThemeForDelete(currentThemeRef?.current));
           dispatch(isDeleteConfirm())
         }, 300);

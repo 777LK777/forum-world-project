@@ -35,18 +35,21 @@ const UpdateCountryModal = () => {
               className={classes.input}
               placeholder={country?.name}
               onChange={e => handleSetName(e.target.value)}
+              value={name}
             />
             <p>Путь:</p>
             <input 
               className={classes.input}
               placeholder={country?.pathFragment} 
               onChange={e => handleSetPthFragment(e.target.value)}
+              value={pathFragment}
             />
             <p>URL изображения:</p>
             <input 
               className={classes.input}
               placeholder={country?.flagImageUrl} 
               onChange={e => handleSetFlagImageUrl(e.target.value)}
+              value={flagImageUrl}
             />
             <img src={country?.flagImageUrl} height={36} width={70}/>
           </div>
