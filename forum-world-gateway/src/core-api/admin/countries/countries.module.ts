@@ -7,7 +7,7 @@ import { CoreApiModule } from 'src/core-api/_shared/core-api-module/core-api.mod
 @Module({
   imports: [
     HttpModule,
-    CoreApiModule.forFeature('/admin')],
+    CoreApiModule.forFeature('/admin/countries')],
   providers: [
     CountriesService
   ],

@@ -17,7 +17,7 @@ export class CoreApiService implements OnApplicationBootstrap {
       this.apiOrigin = await this.configService.get('api-path.origin');
     }
 
-        get<T>(url: string, config?): Observable<AxiosResponse<T>> {
+        get<T>(url: string = '', config?): Observable<AxiosResponse<T>> {
           const path = `${this.apiOrigin}${this.pathFragment}${url}`;
           return this.httpService.get<T>(path, config).pipe(
             catchError((error: AxiosError) => {
@@ -27,6 +27,7 @@ export class CoreApiService implements OnApplicationBootstrap {
           );
         }
       
+        post<T>(data?, config?): Observable<AxiosResponse<T>>;      
         post<T>(url: string, data?, config?): Observable<AxiosResponse<T>> {
           const path = `${this.apiOrigin}${this.pathFragment}${url}`;
           return this.httpService.post<T>(`${path}`, data, config).pipe(
@@ -37,7 +38,8 @@ export class CoreApiService implements OnApplicationBootstrap {
             );
         }
       
-        put<T>(url: string, data?, config?): Observable<AxiosResponse<T>> {
+        put<T>(data?, config?): Observable<AxiosResponse<T>>;
+        put<T>(url?: string, data?, config?): Observable<AxiosResponse<T>> {
           const path = `${this.apiOrigin}${this.pathFragment}${url}`;
           return this.httpService.put<T>(`${path}`, data, config).pipe(
             catchError((error: AxiosError) => {
