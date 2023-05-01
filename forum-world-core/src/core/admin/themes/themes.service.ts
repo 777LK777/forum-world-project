@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ThemesRepository } from './repositories/themes.repository';
-import { ThemeDto as Theme } from './dto/theme-dto';
+import { ThemeDto as Theme, ThemeNameDto } from './dto/theme-dto';
 import { CreateThemeDto } from './dto/create-theme-dto';
 
 @Injectable()
@@ -8,7 +8,11 @@ export class ThemesService {
     constructor(private readonly repo: ThemesRepository) { }
 
     async getThemes(): Promise<Theme[]> {
-        return await this.repo.getThemes();;
+        return await this.repo.getThemes();
+    }
+
+    async getThemesByNameFragment(nameFragment: string): Promise<ThemeNameDto[]> {
+        return await this.repo.getThemesByNameFragment(nameFragment);
     }
 
     async createTheme(dto: CreateThemeDto) {

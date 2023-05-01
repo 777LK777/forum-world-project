@@ -4,7 +4,7 @@ import { ThemesController } from './themes.controller';
 import { CoreApiModule } from 'src/core-api/_shared/core-api-module/core-api.module';
 
 @Module({
-  imports: [CoreApiModule.forFeature('/admin')],
+  imports: [CoreApiModule.forFeature('/admin/themes')],
   providers: [ThemesService],
   controllers: [ThemesController]
 })

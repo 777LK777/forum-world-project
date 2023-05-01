@@ -8,7 +8,6 @@ networks:
 
 volumes:
   postgres:
-  prisma:
   web:
 
 services:
@@ -30,44 +29,12 @@ services:
       - db
       - core
 
-  # forum-world-prisma:
-  #   container_name: forum-world-prisma
-  #   image: prismagraphql/prisma:1.10
-  #   restart: always
-  #   ports:
-  #     - "4466:4466"
-  #   environment:
-  #     SLOW_QUERIES_LOGGING: 'true'
-  #     SLOW_QUERIES_LOGGING_THRESHOLD: '0'
-  #     PRISMA_CONFIG: |
-  #       managementApiSecret: ${PRISMA_API_SECRET}
-  #       port: 4466
-  #       databases:
-  #         default:
-  #           connector: "postgres"
-  #           host: "postgres"
-  #           port: 5432
-  #           user: ${DB_USER}
-  #           password: ${DB_PASSWORD}
-  #           database: ${DB_NAME}
-  #           databases: "public"
-  #       service:
-  #         env: production
-  #   depends_on:
-  #     - postgres
-  #   volumes:
-  #     - prisma:/app
-  #   networks:
-  #     - db
-  #     - prisma
-
   forum-world-core:
     container_name: forum-world-core
-    build:
-      context: ./forum-world-core
-      args:
-        - FW_CORE_PORT=${FW_CORE_PORT}
-        - DATABASE_URL=${DATABASE_URL}
+    image: 777lk777/forum-world-project-forum-world-core:latest
+    environment:
+      FW_CORE_PORT: ${FW_CORE_PORT}
+      DATABASE_URL: ${DATABASE_URL}
     volumes:
       - web:/forum-world-core/app
       - /forum-world-core/app/node_modules
@@ -82,38 +49,24 @@ services:
 
   forum-world-gateway:
     container_name: forum-world-gateway
-    build:
-      context: ./forum-world-gateway
-      args:
-        - FW_GATEWAY_PORT=${FW_GATEWAY_PORT}
-        - FW_UI_PORT=${FW_UI_PORT}
-        - FW_CORE_ORIGIN=${FW_CORE_ORIGIN}
+    image: 777lk777/forum-world-project-forum-world-gateway:latest
+    environment:
+      FW_GATEWAY_PORT: ${FW_GATEWAY_PORT}
+      FW_UI_PORT: ${FW_UI_PORT}
+      FW_UI_ORIGIN: ${FW_UI_ORIGIN}
+      FW_CORE_ORIGIN: ${FW_CORE_ORIGIN}
+      HOST_IP: ${FW_GATEWAY_LOCAL_ORIGIN}
+      HOST_PORT: ${FW_GATEWAY_PORT}
     volumes:
       - web:/forum-world-gateway
       - /forum-world-gateway/app/node_modules
     ports:
       - "${FW_GATEWAY_PORT}:${FW_GATEWAY_PORT}"
-      - "192.168.100.24:8080:${FW_GATEWAY_PORT}"
+      - "${HOST_IP}:${HOST_PORT}:${FW_GATEWAY_PORT}"
     depends_on:
       - forum-world-core
     command: npm run ${GATEWAY_RUN_CMD}
     restart: always
     networks:
       - core
-      - frontend
-      
-  forum-world-ui:
-    container_name: forum-world-ui
-    build:
-      context: ./forum-world-ui
-    volumes:
-      - web:/forum-world-ui
-      - /forum-world-ui/app/node_modules
-    ports:
-      - "${FW_UI_PORT}:${FW_UI_PORT}"
-    depends_on:
-      - forum-world-gateway
-    command: npm run ${UI_RUN_CMD} -- -p ${FW_UI_PORT}
-    restart: always
-    networks:
       - frontend

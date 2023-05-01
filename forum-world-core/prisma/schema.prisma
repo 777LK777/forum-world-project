@@ -22,10 +22,35 @@ model Country {
   name String
   pathFragment String @unique
   flagImageUrl String @default("")
+  posts Post[]
+  contentId Int?
+  content Content? @relation(fields: [contentId], references: [contentId], onDelete: Restrict)
 }
 
 model Theme {
   themeId Int @id @default(autoincrement())
   name String
   pathFragment String @unique
+  posts Post[]
+  contentId Int?
+  content Content? @relation(fields: [contentId], references: [contentId], onDelete: Restrict)
+}
+
+model Post {
+  postId Int @id @default(autoincrement())
+  name String
+  themeId Int?
+  theme Theme? @relation(fields: [themeId], references: [themeId], onDelete: Restrict)
+  countryId Int
+  country Country @relation(fields: [countryId], references: [countryId], onDelete: Restrict)
+  contentId Int?
+  content Content? @relation(fields: [contentId], references: [contentId], onDelete: Restrict)
+}
+
+model Content {
+  contentId Int @id @default(autoincrement())
+  data Json
+  posts Post[]
+  themes Theme[]
+  country Country[]
 }

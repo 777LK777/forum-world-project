@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 
 import { CountriesService } from './countries.service';
 import { CreateCountryDto } from './dto/create-country-dto';
 import { CountryDto as Country } from './dto/country-dto';
+import { CountryNameDto } from './dto/country-name-dto';
 
 @Controller('api/admin/countries')
 export class CountriesController {
@@ -12,6 +13,11 @@ export class CountriesController {
     @Get()
     async getCountries(): Promise<Country[]> {
         return await this.countriesService.getCountries();
+    }
+
+    @Get('/search')
+    async getCountriesByNameFragment(@Query('name') nameFragment: string): Promise<CountryNameDto[]> {
+        return await this.countriesService.getCountriesByNameFragment(nameFragment);
     }
 
     @Post()
