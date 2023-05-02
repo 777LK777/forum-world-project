@@ -17,12 +17,12 @@ export class PostsService {
     }
 
     async createPost(dto: CreatePostDto): Promise<PostDto> {
-        const { data } = await firstValueFrom(this.api.post<PostDto>());
+        const { data } = await firstValueFrom(this.api.post<PostDto>(dto));
         return data;
     }
 
     async updatePost(dto: PostDto): Promise<PostDto> {
-        const { data } = await firstValueFrom(this.api.put<PostDto>());
+        const { data } = await firstValueFrom(this.api.put<PostDto>(dto));
         return data;
     }
 
@@ -54,6 +54,4 @@ export class PostsService {
         const { data } = await firstValueFrom(this.api.delete<ContentDto>(this.getContentPath(postId)));
         return data;
     }
-
-
 }
