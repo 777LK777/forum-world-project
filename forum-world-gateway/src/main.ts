@@ -18,6 +18,6 @@ async function bootstrap() {
   });
 
   if (!startupConfig?.origin) app.listen(startupConfig.port);
-  else await app.listen(startupConfig.origin, startupConfig.port);
+  else await app.listen(startupConfig.port, startupConfig.origin);
 }
 bootstrap();

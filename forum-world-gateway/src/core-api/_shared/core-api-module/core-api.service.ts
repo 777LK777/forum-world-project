@@ -29,6 +29,12 @@ export class CoreApiService implements OnApplicationBootstrap {
       
         post<T>(data?, config?): Observable<AxiosResponse<T>>;      
         post<T>(url: string, data?, config?): Observable<AxiosResponse<T>> {
+          if (typeof url !== 'string') {
+            config = data;
+            data = url;
+            url = ''
+          }
+
           const path = `${this.apiOrigin}${this.pathFragment}${url}`;
           return this.httpService.post<T>(`${path}`, data, config).pipe(
             catchError((error: AxiosError) => {
@@ -40,6 +46,12 @@ export class CoreApiService implements OnApplicationBootstrap {
       
         put<T>(data?, config?): Observable<AxiosResponse<T>>;
         put<T>(url?: string, data?, config?): Observable<AxiosResponse<T>> {
+          if (typeof url !== 'string') {
+            config = data;
+            data = url;
+            url = ''
+          }
+
           const path = `${this.apiOrigin}${this.pathFragment}${url}`;
           return this.httpService.put<T>(`${path}`, data, config).pipe(
             catchError((error: AxiosError) => {
@@ -49,7 +61,7 @@ export class CoreApiService implements OnApplicationBootstrap {
             );
         }
       
-        delete<T>(url: string, config?): Observable<AxiosResponse<T>> {
+        delete<T>(url: string = '', config?): Observable<AxiosResponse<T>> {
           const path = `${this.apiOrigin}${this.pathFragment}${url}`;
           return this.httpService.delete<T>(`${path}`, config).pipe(
             catchError((error: AxiosError) => {
