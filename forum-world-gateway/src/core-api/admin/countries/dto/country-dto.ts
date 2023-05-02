@@ -2,5 +2,6 @@ export class CountryDto {
     id: number
     name: string
     pathFragment: string
-    flagImageUrl: string 
+    flagImageUrl: string
+    contentId?: number
 }

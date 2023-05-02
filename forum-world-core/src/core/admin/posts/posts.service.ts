@@ -40,7 +40,7 @@ export class PostsService {
 
     async createContent(dto: CreateContentDto, postId: number): Promise<ContentDto> {
         const content = await this.contentsService.createContent(dto);
-        await this.postsRepository.updatePostContent(postId, content.id);
+        await this.postsRepository.updateContent(postId, content.id);
         return content;
     }
     
