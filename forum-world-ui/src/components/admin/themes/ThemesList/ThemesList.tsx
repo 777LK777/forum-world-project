@@ -13,7 +13,6 @@ interface IThemesListProps {
 }
 
 const ThemesList: React.FC<IThemesListProps> = ( { data } ) => {
-
   const dispatch = useAppDispatch();
 
   const currentThemeRef = useRef<ITheme>();

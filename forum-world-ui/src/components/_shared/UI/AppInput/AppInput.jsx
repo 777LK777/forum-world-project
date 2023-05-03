@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './AppInput.module.scss';
 
-const AppInput = ({ type = 'text', placeholder, value, onChange }) => {
+const AppInput = ({ type = 'text', placeholder, value, onChange, onBlur = () => {} }) => {
   return (
     <input
       type={type}
@@ -9,6 +9,7 @@ const AppInput = ({ type = 'text', placeholder, value, onChange }) => {
       value={value}
       onChange={onChange}
       className={styles.input}
+      onBlur={onBlur}
     />
   );
 };

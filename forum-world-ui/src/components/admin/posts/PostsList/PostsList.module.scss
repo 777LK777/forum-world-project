@@ -1,0 +1,70 @@
+@import '../../../../styles/vars.scss';
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.4rem;
+    line-height: 3rem;
+}
+  
+.th,
+.td {
+    border: 1px solid black;
+    padding: 15px 8px;
+    text-align: left;
+    width: 50%;
+    overflow: hidden;
+    max-width: 45vw;
+    @media ($tablet) {
+        max-width: 230px;
+    }
+}
+  
+.th {
+    background-color: #999;
+    font-size: 1.6rem;
+}
+  
+.tr:nth-child(even) {
+    background-color: #e6e6e6;
+    overflow: hidden;
+}
+
+.icons {
+    display: none;
+    @media ($desktop) {
+        display: table-cell;
+        line-height: 1;
+        border: 1px solid black;
+        padding: 1.5rem;
+        text-align: left;
+        width: 40px;
+        cursor: pointer;
+    }
+} 
+
+.tr.deleted {
+    animation: slide-out-right 0.3s forwards;
+}
+  
+.tr.updated {
+    animation: slide-out-left 0.3s forwards;
+}
+
+@keyframes slide-out-right {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+}
+  
+@keyframes slide-out-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+}
