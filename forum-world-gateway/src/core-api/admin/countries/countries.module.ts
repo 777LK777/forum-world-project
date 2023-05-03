@@ -8,9 +8,7 @@ import { CoreApiModule } from 'src/core-api/_shared/core-api-module/core-api.mod
   imports: [
     HttpModule,
     CoreApiModule.forFeature('/admin/countries')],
-  providers: [
-    CountriesService
-  ],
+  providers: [CountriesService],
   controllers: [CountriesController]
 })
 export class CountriesModule {}

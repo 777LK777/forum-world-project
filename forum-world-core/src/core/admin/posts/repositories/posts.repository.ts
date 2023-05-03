@@ -53,7 +53,7 @@ export class PostsRepository {
         return new PostContentLinkDto(res.postId, res.contentId);
     }
 
-    async updatePostContent(postId: number, contentId: number): Promise<PostDto> {
+    async updateContent(postId: number, contentId: number): Promise<PostDto> {
         const res = await this.prismaService.post.update({
             data: { contentId: contentId },
             where: { postId: +postId }
