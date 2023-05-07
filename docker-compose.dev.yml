@@ -106,18 +106,18 @@ services:
       - core
       - frontend
       
-  forum-world-ui:
-    container_name: forum-world-ui
-    build:
-      context: ./forum-world-ui
-    volumes:
-      - web:/forum-world-ui
-      - /forum-world-ui/app/node_modules
-    ports:
-      - "${FW_UI_PORT}:${FW_UI_PORT}"
-    depends_on:
-      - forum-world-gateway
-    command: npm run ${UI_RUN_CMD} -- -p ${FW_UI_PORT}
-    restart: always
-    networks:
-      - frontend
+  # forum-world-ui:
+  #   container_name: forum-world-ui
+  #   build:
+  #     context: ./forum-world-ui
+  #   volumes:
+  #     - web:/forum-world-ui
+  #     - /forum-world-ui/app/node_modules
+  #   ports:
+  #     - "${FW_UI_PORT}:${FW_UI_PORT}"
+  #   depends_on:
+  #     - forum-world-gateway
+  #   command: npm run ${UI_RUN_CMD} -- -p ${FW_UI_PORT}
+  #   restart: always
+  #   networks:
+  #     - frontend

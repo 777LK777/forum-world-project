@@ -1,23 +1,35 @@
+// outside
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
+// users
 import { usersApi } from "./users/users.api";
+
+// countries
 import { countriesApi } from "./admin/countries/countries.api";
-import countriesPageSlice from "../store/admin/countries/slices/countriesPageSlice";
+import countriesPageSlice from "@/store/admin/countries/slices/countriesPageSlice";
 import updateCountryModalSlice from "./admin/countries/slices/updateCountryModalSlice";
-import deleteModalSlice from './admin/countries/slices/deleteConfirmModal'
+
+// themes
 import { themesApi } from "./admin/themes/themes.api";
 import themesPageSlice from "./admin/themes/slices/themesPageSlice";
 import updateThemeModalSlice from "./admin/themes/slices/updateThemeModalSlice";
 
+// shared
+import deleteModalSlice from './admin/countries/slices/deleteConfirmModal';
+import contentEditorModalSlice from "./admin/_shared/slices/contentEditorModalSlice";
+
+
 const rootReducer = combineReducers({
     [usersApi.reducerPath]: usersApi.reducer,
+    [countriesApi.reducerPath]: countriesApi.reducer,
     countriesPageSlice,
     updateCountryModalSlice,
-    deleteModalSlice,
-    [countriesApi.reducerPath]: countriesApi.reducer,
     [themesApi.reducerPath] : themesApi.reducer,
     themesPageSlice, 
-    updateThemeModalSlice
+    updateThemeModalSlice,
+    
+    deleteModalSlice,
+    contentEditorModalSlice
 })
 
 export const store = configureStore({

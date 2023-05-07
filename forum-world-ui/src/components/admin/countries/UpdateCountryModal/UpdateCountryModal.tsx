@@ -3,7 +3,7 @@ import classes from './UpdateCountryModal.module.scss';
 
 import { setCountryForUpdate } from '@/store/admin/countries/slices/countriesPageSlice'
 import { closeUpdateCountry } from '@/store/admin/countries/slices/updateCountryModalSlice';
-import { useAppDispatch, useAppSelector } from '@/pages/hooks/_shared/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/_shared/redux';
 import { ICountry } from '@/models/ICountry';
 
 const UpdateCountryModal = () => {

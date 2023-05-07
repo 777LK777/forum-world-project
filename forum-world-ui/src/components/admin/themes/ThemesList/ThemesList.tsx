@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import classes from './ThemesList.module.scss';
-import { useAppDispatch } from '@/pages/hooks/_shared/redux';
+import { useAppDispatch } from '@/hooks/_shared/redux';
 import { setThemeForDelete } from '@/store/admin/themes/slices/themesPageSlice';
 import { isDeleteConfirm, openDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
 import { ITheme } from '@/models/ITheme';

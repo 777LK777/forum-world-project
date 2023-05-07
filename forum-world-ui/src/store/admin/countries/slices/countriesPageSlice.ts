@@ -4,11 +4,13 @@ import { ICountry } from "@/models/ICountry";
 export interface ICountriesState {
     countryToUpdate?: ICountry
     countryToDelete?: ICountry
+    countryToContentEdit?: ICountry
 }
   
 const initialState: ICountriesState = {
     countryToUpdate: undefined,
-    countryToDelete: undefined
+    countryToDelete: undefined,
+    countryToContentEdit: undefined
 };
 
 const countriesPageSlice = createSlice({
@@ -20,10 +22,16 @@ const countriesPageSlice = createSlice({
         },
         setCountryForDelete(state, action: PayloadAction<ICountry>) {
             state.countryToDelete = action.payload;
+        },
+        setCountryToContentEdit(state, action: PayloadAction<ICountry>) {
+            state.countryToContentEdit = action.payload
+        },
+        resetCountryPageSlice(state) {
+            return initialState
         }
     }
 })
 
-export const { setCountryForUpdate, setCountryForDelete } = countriesPageSlice.actions;
+export const { setCountryForUpdate, setCountryForDelete, setCountryToContentEdit, resetCountryPageSlice } = countriesPageSlice.actions;
 
 export default countriesPageSlice.reducer;

@@ -30,13 +30,14 @@ export class CountriesService {
 
     async removeCountry(countryId: number): Promise<CountryDto> {
         const countryContentLink = await this.repo.getCountryContentLinkByCountryId(countryId);
-        await this.contentService.removeContent(countryContentLink.contentId);
-        return await this.repo.removeCountry(countryId);
+        const country = await this.repo.removeCountry(countryId);
+        if (countryContentLink?.contentId) await this.contentService.removeContent(countryContentLink.contentId);
+        return country;
     }
 
     async getContent(countryId: number): Promise<ContentDto> {
         const countryContentLink = await this.repo.getCountryContentLinkByCountryId(countryId);
-        if (!countryContentLink.contentId) return undefined;
+        if (!countryContentLink.contentId) return new ContentDto(0, {});
         return await this.contentService.getContentById(countryContentLink.contentId);
     }
 

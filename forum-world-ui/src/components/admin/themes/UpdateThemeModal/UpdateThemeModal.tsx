@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './UpdateThemeModal.module.scss';
 
-import { useAppDispatch, useAppSelector } from "@/pages/hooks/_shared/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/_shared/redux";
 import { ITheme } from '@/models/ITheme';
 import { setThemeForUpdate } from '@/store/admin/themes/slices/themesPageSlice';
 import { closeUpdateTheme } from '@/store/admin/themes/slices/updateThemeModalSlice';

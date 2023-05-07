@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface IDeleteModalState<T> {
+export interface IDeleteModalState {
     isOpen: boolean;
-    isDeleteSelected: boolean
+    isDeleteSelected: boolean;
+    isDeleteDeclined: boolean;
 }
 
-const initialState: IDeleteModalState<any> = {
+const initialState: IDeleteModalState = {
     isOpen: false,
-    isDeleteSelected: false
+    isDeleteSelected: false,
+    isDeleteDeclined: false
 }
 
 const deleteModalSlice = createSlice({
@@ -23,12 +25,15 @@ const deleteModalSlice = createSlice({
         isDeleteConfirm(state) {
             state.isDeleteSelected = true;
         },
+        isDeclineConfirm(state) {
+            state.isDeleteDeclined = true;
+        },
         resetDeleteModal() {
             return initialState;
         }
     }
 })
 
-export const { openDeleteModal, closeDeleteModal, isDeleteConfirm, resetDeleteModal } = deleteModalSlice.actions
+export const { openDeleteModal, closeDeleteModal, isDeleteConfirm, isDeclineConfirm, resetDeleteModal } = deleteModalSlice.actions
 
 export default deleteModalSlice.reducer
