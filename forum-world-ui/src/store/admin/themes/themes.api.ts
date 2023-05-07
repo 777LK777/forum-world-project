@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ITheme } from '@/models/ITheme';
+import { IThemeName } from '@/models/IThemeName';
 
 export const themesApi = createApi({
     reducerPath: 'admin/themes/api',
@@ -16,6 +17,14 @@ export const themesApi = createApi({
                 return response.sort((a, b) => (a.id ?? 0) - (b.id ?? 1));
             },
             providesTags: result => ["Theme"]
+        }),
+        getThemesByNameFragment: build.query<IThemeName[], string>({
+            query: (nameFragment: string) => ({
+                url: 'themes/search',
+                params: {
+                    name: nameFragment
+                }
+            }),
         }),
         createTheme: build.mutation<ITheme, ITheme>({
             query: (theme) => ({
@@ -58,6 +67,7 @@ export const themesApi = createApi({
 
 export const {
     useGetAllThemesQuery,
+    useGetThemesByNameFragmentQuery,
     useCreateThemeMutation, 
     useChangeThemeMutation, 
     useDeleteThemeMutation } = themesApi;

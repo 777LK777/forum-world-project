@@ -29,16 +29,6 @@
     }
 }
 
-.hamburger__container {
-    position: fixed;
-    top: 2.6rem; 
-    right: 2rem;
-    z-index: 2;
-    @media screen and ($tablet) {
-        display: none;
-    }
-}
-
 .hamburger {
     display: flex;
     flex-direction: column;
@@ -99,15 +89,28 @@
   }
 }
 
+.dropdownContainer {
+  position: relative;
+  max-height: 10rem;
+}
+
 .dropdown {
   padding: .5rem 0;
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   max-height: 10rem;
-  width: 20.2rem;
+  width: 59.9rem;
   overflow-y: auto;
+  position: absolute;
+  top: 3.5rem;
+  left: 0;
+  background-color: white;
+  z-index: 1;
   &__item {
     cursor: pointer;
     margin-bottom: 0.5rem;
+    &:hover {
+      background-color: $bgTableGrey;
+    }
   }
 }

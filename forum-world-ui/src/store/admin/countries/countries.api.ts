@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { ICountry } from '@/models/ICountry';
-import { IContent } from '@/models/IContent';
+import { ICountryName } from '@/models/ICountryName';
 
 
 export const countriesApi = createApi({
@@ -19,6 +19,14 @@ export const countriesApi = createApi({
                 return response.sort((a, b) => (a.id ?? 0) - (b.id ?? 1));
             },
             providesTags: result => ['Country']
+        }),
+        getCountriesByNameFragment: build.query<ICountryName[], string>({
+            query: (nameFragment: string) => ({
+                url: 'countries/search',
+                params: {
+                    name: nameFragment
+                }
+            })
         }),
         createCountry: build.mutation<ICountry, ICountry>({
             query: (country) => ({
@@ -94,6 +102,7 @@ export const countriesApi = createApi({
 
 export const {
     useGetAllCountriesQuery,
+    useGetCountriesByNameFragmentQuery,
     useCreateCountryMutation, 
     useUpdateCountryMutation, 
     useDeleteCountryMutation,
