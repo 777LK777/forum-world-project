@@ -26,7 +26,7 @@ export class PostsService {
 
     async removePost(postId: number): Promise<PostDto> {
         const postContentLink = await this.postsRepository.getPostContentLinkByPostId(postId);
-        await this.contentsService.removeContent(postContentLink.contentId);
+        if (postContentLink?.contentId) await this.contentsService.removeContent(postContentLink.contentId);
         const post = await this.postsRepository.removePost(postId);
 
         return post;

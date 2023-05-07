@@ -4,13 +4,13 @@ import AdminSidebar from "@/components/admin/countries/AdminSidebar/AdminSidebar
 import AppInput from "@/components/_shared/UI/AppInput/AppInput";
 import AppButton from "@/components/_shared/UI/AppButton/AppButton";
 import { useChangePostMutation, useCreatePostMutation, useDeletePostMutation, useGetAllPostsQuery } from "@/store/admin/posts/posts.api";
-import { useAppDispatch, useAppSelector } from "@/pages/hooks/_shared/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/_shared/redux";
 import { closeDeleteModal, resetDeleteModal } from "@/store/admin/countries/slices/deleteConfirmModal";
 import { closeUpdatePost } from "@/store/admin/posts/slices/updatePostModalSlice";
 import PostsList from "@/components/admin/posts/PostsList/PostsList";
 import DeleteConfirmModal from "@/components/_shared/DeleteConfirmModal/DeleteConfirmModal";
 import UpdatePostModal from "@/components/admin/posts/UpdatePostModal/UpdatePostModal";
-import { useDebounce } from "@/pages/hooks/_shared/debounce";
+import { useDebounce } from "@/hooks/_shared/debounce";
 import { useGetThemesByNameFragmentQuery } from "@/store/admin/themes/themes.api";
 import { useGetCountriesByNameFragmentQuery } from "@/store/admin/countries/countries.api";
 

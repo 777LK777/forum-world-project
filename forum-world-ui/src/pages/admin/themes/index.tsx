@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import AppButton from '@/components/_shared/UI/AppButton/AppButton';
 import { useChangeThemeMutation, useCreateThemeMutation, useDeleteThemeMutation, useGetAllThemesQuery } from '@/store/admin/themes/themes.api';
 import ThemesList from '../../../components/admin/themes/ThemesList/ThemesList';
-import { useAppDispatch, useAppSelector } from '@/pages/hooks/_shared/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/_shared/redux';
 import DeleteConfirmModal from '@/components/_shared/DeleteConfirmModal/DeleteConfirmModal';
 import { closeDeleteModal, resetDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
 import { closeUpdateTheme } from '@/store/admin/themes/slices/updateThemeModalSlice';
