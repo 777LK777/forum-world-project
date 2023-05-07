@@ -13,6 +13,8 @@ import updateCountryModalSlice from "./admin/countries/slices/updateCountryModal
 import { themesApi } from "./admin/themes/themes.api";
 import themesPageSlice from "./admin/themes/slices/themesPageSlice";
 import updateThemeModalSlice from "./admin/themes/slices/updateThemeModalSlice";
+
+// posts
 import { postsApi } from "./admin/posts/posts.api";
 import postsPageSlice from "./admin/posts/slices/postsPageSlice";
 import updatePostModalSlice from "./admin/posts/slices/updatePostModalSlice";
@@ -28,14 +30,14 @@ const rootReducer = combineReducers({
     countriesPageSlice,
     updateCountryModalSlice,
     [themesApi.reducerPath] : themesApi.reducer,
-    themesPageSlice, 
-    [postsApi.reducerPath]: postsApi.reducer,
+    themesPageSlice,
     updateThemeModalSlice,
+    [postsApi.reducerPath]: postsApi.reducer,
+    postsPageSlice,
+    updatePostModalSlice,
     
     deleteModalSlice,
-    contentEditorModalSlice
-    postsPageSlice,
-    updatePostModalSlice
+    contentEditorModalSlice,
 })
 
 export const store = configureStore({

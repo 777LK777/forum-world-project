@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { ICountry } from '@/models/ICountry';
 import { ICountryName } from '@/models/ICountryName';
+import { IContent } from '@/models/IContent';
 
 
 export const countriesApi = createApi({

@@ -1,5 +1,5 @@
 import { IPost } from "@/models/IPost";
-import { useAppDispatch } from "@/pages/hooks/_shared/redux";
+import { useAppDispatch } from '@/hooks/_shared/redux';
 import { isDeleteConfirm, openDeleteModal } from "@/store/admin/countries/slices/deleteConfirmModal";
 import { setPostForDelete } from "@/store/admin/posts/slices/postsPageSlice";
 import { openUpdatePost } from "@/store/admin/posts/slices/updatePostModalSlice";

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classes from './UpdatePostModal.module.scss';
-import { useAppDispatch, useAppSelector } from '@/pages/hooks/_shared/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/_shared/redux';
 import { IPost } from '@/models/IPost';
 import { setPostForUpdate } from '@/store/admin/posts/slices/postsPageSlice';
 import { closeUpdatePost } from '@/store/admin/posts/slices/updatePostModalSlice';
