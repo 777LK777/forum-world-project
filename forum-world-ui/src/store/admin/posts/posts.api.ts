@@ -5,7 +5,7 @@ export const postsApi = createApi({
     reducerPath: 'admin/posts/api',
     tagTypes: ["Post"],
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://192.168.100.23:4000/api/admin'
+        baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api/admin/`
     }),
     endpoints: build => ({
         getAllPosts: build.query<IPost[], void>({

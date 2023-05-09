@@ -3,42 +3,46 @@ import { PrismaService } from "src/database/prisma.service";
 import { PostDto } from "../dto/post-dto";
 import { CreatePostDto } from "../dto/create-post-dto";
 import { PostContentLinkDto } from "../dto/post-content-link-dto";
+import { ThemeNameDto as Theme } from "../../themes/dto/theme-dto";
+import { CountryNameDto as Country } from "../../countries/dto/country-dto";
 
 @Injectable()
 export class PostsRepository {
     // CUD: create update delete
-    selectCUD: {
+    selectCUD = {
         postId: true,
         name: true,
-        countryId: true,
         themeId: true,
-        contentId: true
+        countryId: true,
+        contentId: true,
+        country: {
+          select: {
+            countryId: true,
+            name: true
+          }  
+        },
+        theme: {
+            select: {
+                themeId: true,
+                name: true
+            }
+        }
     }
 
     constructor(private readonly prismaService: PrismaService) { }
 
     async getPosts(): Promise<PostDto[]> {
+
+        console.log(this.selectCUD)
         const res = await this.prismaService.post.findMany({
-            select: {
-                postId: true,
-                name: true,
-                countryId: true,
-                themeId: true,
-                contentId: true,
-                theme: {
-                    select: {
-                        name: true
-                    }
-                },
-                country: {
-                    select: {
-                        name: true
-                    }
-                }
-            }
+            select: this.selectCUD
         })
 
-        return await res.map(p => new PostDto(p.postId, p.name, p.countryId, p.themeId, p.contentId))
+        return await res.map(p => {
+            const country = new Country(p.countryId, p.country.name);
+            const theme = !p.themeId ? undefined : new Theme(p.themeId, p.theme.name);
+            return new PostDto(p.postId, p.name, country, theme, p.contentId)
+        })
     }
 
     async getPostContentLinkByPostId(postId: number): Promise<PostContentLinkDto> {
@@ -56,10 +60,14 @@ export class PostsRepository {
     async updateContent(postId: number, contentId: number): Promise<PostDto> {
         const res = await this.prismaService.post.update({
             data: { contentId: contentId },
+            select: this.selectCUD,
             where: { postId: +postId }
         })
+        
+        const country = new Country(res.countryId, res.country.name);
+        const theme = !res.themeId ? undefined : new Theme(res.themeId, res.theme.name);
 
-        return new PostDto(res.postId, res.name, res.countryId, res.themeId, res.contentId)
+        return new PostDto(res.postId, res.name, country, theme, res.contentId)
     }
 
     async createPost(dto: CreatePostDto): Promise<PostDto> {
@@ -68,7 +76,12 @@ export class PostsRepository {
             select: this.selectCUD
         })
 
-        return new PostDto(res.postId, res.name, res.countryId, res.themeId, res.contentId)
+        console.log(res)
+        
+        const country = new Country(res.countryId, res.country.name);
+        const theme = !res.themeId ? undefined : new Theme(res.themeId, res.theme.name);
+
+        return new PostDto(res.postId, res.name, country, theme, res.contentId)
     }
 
     async updatePost(dto: PostDto): Promise<PostDto> {
@@ -78,21 +91,28 @@ export class PostsRepository {
             },
             data: {
                 name: dto.name,
-                themeId: dto.themeId
+                themeId: dto.theme?.id
             },
             select: this.selectCUD
         })
+        
+        const country = new Country(res.countryId, res.country.name);
+        const theme = !res.themeId ? undefined : new Theme(res.themeId, res.theme.name);
 
-        return new PostDto(res.postId, res.name, res.countryId, res.themeId, res.contentId)
+        return new PostDto(res.postId, res.name, country, theme, res.contentId)
     }
 
     async removeContent(postId: number): Promise<PostDto> {
         const res = await this.prismaService.post.update({
             data: { contentId: null },
-            where: { postId: +postId}
+            select: this.selectCUD,
+            where: { postId: +postId},
         })
+        
+        const country = new Country(res.countryId, res.country.name);
+        const theme = !res.themeId ? undefined : new Theme(res.themeId, res.theme.name);
 
-        return new PostDto(res.postId, res.name, res.countryId, res.themeId, res.contentId);
+        return new PostDto(res.postId, res.name, country, theme, res.contentId)
     }
 
     async removePost(postId: number): Promise<PostDto> {
@@ -100,7 +120,10 @@ export class PostsRepository {
             where: { postId: postId},
             select: this.selectCUD
         })
+        
+        const country = new Country(res.countryId, res.country.name);
+        const theme = !res.themeId ? undefined : new Theme(res.themeId, res.theme.name);
 
-        return new PostDto(res.postId, res.name, res.countryId, res.themeId, res.contentId)
+        return new PostDto(res.postId, res.name, country, theme, res.contentId)
     }
 }
