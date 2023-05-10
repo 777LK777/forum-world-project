@@ -128,7 +128,6 @@ const Countries = () => {
   useEffect(() => {
     if (!results.data) return;
     if (results.isFetching) return;
-    console.log(results)
     if (results.data.id === 0) dispatch(openContentEditorModal(results.data));
     else dispatch(openContentEditorModal(results.data));
   }, [results])

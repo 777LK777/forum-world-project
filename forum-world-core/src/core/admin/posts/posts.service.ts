@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PostsRepository } from './repositories/posts.repository';
 import { PostDto } from './dto/post-dto';
 import { CreatePostDto } from './dto/create-post-dto';
-import { ContentDto } from '../_share/contents/dto/content-dto';
+import { ContentDto, nullContent } from '../_share/contents/dto/content-dto';
 import { ContentsService } from '../_share/contents/contents.service';
 import { CreateContentDto } from '../_share/contents/dto/create-content-dto';
 
@@ -26,15 +26,14 @@ export class PostsService {
 
     async removePost(postId: number): Promise<PostDto> {
         const postContentLink = await this.postsRepository.getPostContentLinkByPostId(postId);
-        if (postContentLink?.contentId) await this.contentsService.removeContent(postContentLink.contentId);
         const post = await this.postsRepository.removePost(postId);
-
+        if (postContentLink?.contentId) await this.contentsService.removeContent(postContentLink.contentId);
         return post;
     }
 
     async getContent(postId: number): Promise<ContentDto> {
         const postContentLink = await this.postsRepository.getPostContentLinkByPostId(postId);
-        if (!postContentLink.contentId) return undefined;
+        if (!postContentLink.contentId) return nullContent;
         return await this.contentsService.getContentById(postContentLink.contentId);
     }
 
@@ -46,7 +45,7 @@ export class PostsService {
     
     async updateContent(dto: ContentDto, postId: number): Promise<ContentDto> {
         const postContentLink = await this.postsRepository.getPostContentLinkByPostId(postId);
-        if (postContentLink.contentId !== dto.id) return undefined;
+        if (postContentLink.contentId !== dto.id) return nullContent;
         return await this.contentsService.updateContent(dto);
     }
 

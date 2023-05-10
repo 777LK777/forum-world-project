@@ -3,7 +3,7 @@ import { CountriesRepository } from './repositories/countries.repository';
 import { CountryDto, CountryNameDto } from './dto/country-dto';
 import { CreateCountryDto } from './dto/create-country-dto';
 import { ContentsService } from '../_share/contents/contents.service';
-import { ContentDto } from '../_share/contents/dto/content-dto';
+import { ContentDto, nullContent } from '../_share/contents/dto/content-dto';
 import { CreateContentDto } from '../_share/contents/dto/create-content-dto';
 
 @Injectable()
@@ -37,7 +37,7 @@ export class CountriesService {
 
     async getContent(countryId: number): Promise<ContentDto> {
         const countryContentLink = await this.repo.getCountryContentLinkByCountryId(countryId);
-        if (!countryContentLink.contentId) return new ContentDto(0, {});
+        if (!countryContentLink.contentId) return nullContent;
         return await this.contentService.getContentById(countryContentLink.contentId);
     }
 
@@ -49,7 +49,7 @@ export class CountriesService {
 
     async updateContent(dto: ContentDto, countryId: number): Promise<ContentDto> {
         const countryContentLink = await this.repo.getCountryContentLinkByCountryId(countryId);
-        if (countryContentLink.contentId !== dto.id) return undefined;
+        if (countryContentLink.contentId !== dto.id) return nullContent;
         return await this.contentService.updateContent(dto);
     }
     

@@ -1,7 +1,10 @@
+import { ThemeNameDto as Theme } from "../../themes/dto/theme-name-dto"
+import { CountryNameDto as Country } from "../../countries/dto/country-name-dto"
+
 export class PostDto {
     id: number
     name: string
-    countryId: number
-    themeId?: number
+    country: Country
+    theme?: Theme
     contentId?: number
 }
