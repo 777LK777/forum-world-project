@@ -68,6 +68,8 @@
 
 .icons {
     display: none;
+    font-size: 30px;
+    color: #999;
     @media ($desktop) {
         display: table-cell;
         line-height: 1;
@@ -76,5 +78,8 @@
         text-align: left;
         width: 40px;
         cursor: pointer;
+    }
+    &:hover {
+        color: #000;
     }
 } 
