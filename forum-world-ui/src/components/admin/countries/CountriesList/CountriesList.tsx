@@ -1,11 +1,20 @@
 // outside
-import Image from 'next/image';
 import { useRef } from 'react';
 import { useGesture } from 'react-use-gesture';
 import { useAppDispatch } from '@/hooks/_shared/redux';
 
 // css
 import classes from './CountriesList.module.scss'
+
+// ant design
+// tooltip
+import { Tooltip } from 'antd';
+// icons
+import {
+  FormOutlined,
+  DeleteOutlined,
+  ToolOutlined
+} from '@ant-design/icons';
 
 // models
 import { ICountry } from '@/models/ICountry';
@@ -14,7 +23,6 @@ import { ICountry } from '@/models/ICountry';
 import { isDeleteConfirm } from '@/store/admin/countries/slices/deleteConfirmModal';
 import { openUpdateCountry } from '@/store/admin/countries/slices/updateCountryModalSlice';
 import { setCountryForDelete, setCountryToContentEdit } from '@/store/admin/countries/slices/countriesPageSlice';
-
 
 interface ICountriesListProps {
     data: ICountry[] | undefined;
@@ -95,28 +103,19 @@ const CountriesList: React.FC<ICountriesListProps> = ( {data} ) => {
               />
             </td>
             <td onClick={() => handleOpenContentEditor(country)} className={classes.icons}>
-            <Image
-                src="/images/editIcon.png"
-                alt='edit'
-                width={30}
-                height={30}
-              />
+              <Tooltip title="Редактировать контент">
+                <FormOutlined />
+              </Tooltip>
             </td>
             <td onClick={() => handleUpdateClick(country)} className={classes.icons}>
-              <Image
-                src="/images/editIcon.png"
-                alt='edit'
-                width={30}
-                height={30}
-              />
+              <Tooltip title="Редактировать страну">
+                <ToolOutlined />
+              </Tooltip>
             </td>
             <td onClick={() => handleDeleteClick(country)} className={classes.icons}>
-              <Image
-                src="/images/deleteIcon.png"
-                alt='delete'
-                width={30}
-                height={30}
-              />
+              <Tooltip title="Удалить страну">
+                <DeleteOutlined />
+              </Tooltip>
             </td>
           </tr>
         ))}

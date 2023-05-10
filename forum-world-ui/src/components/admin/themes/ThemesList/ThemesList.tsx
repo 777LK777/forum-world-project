@@ -1,11 +1,26 @@
+// outside
 import { useRef } from 'react';
-import Image from 'next/image';
-import classes from './ThemesList.module.scss';
+import { useGesture } from 'react-use-gesture';
 import { useAppDispatch } from '@/hooks/_shared/redux';
+
+// css
+import classes from './ThemesList.module.scss';
+
+// ant design
+// tooltip
+import { Tooltip } from 'antd';
+// icons
+import {
+  DeleteOutlined,
+  ToolOutlined
+} from '@ant-design/icons';
+
+// models
+import { ITheme } from '@/models/ITheme';
+
+// slices
 import { setThemeForDelete } from '@/store/admin/themes/slices/themesPageSlice';
 import { isDeleteConfirm, openDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
-import { ITheme } from '@/models/ITheme';
-import { useGesture } from 'react-use-gesture';
 import { openUpdateTheme } from '@/store/admin/themes/slices/updateThemeModalSlice';
 
 interface IThemesListProps {
@@ -71,20 +86,14 @@ const ThemesList: React.FC<IThemesListProps> = ( { data } ) => {
             <td id={`${theme.id}`} className={classes.td}>{theme.name}</td>
             <td id={`${theme.id}`} className={classes.td}>{theme.pathFragment}</td>
             <td onClick={() => handleUpdateClick(theme)} className={classes.icons}>
-             <Image
-                src="/images/editIcon.png"
-                alt='edit'
-                width={30}
-                height={30}
-              />
+              <Tooltip title="Редактировать тему">
+                <ToolOutlined />
+              </Tooltip>
             </td>
             <td onClick={() => handleDeleteClick(theme)} className={classes.icons}>
-              <Image
-                src="/images/deleteIcon.png"
-                alt='delete'
-                width={30}
-                height={30}
-              />
+              <Tooltip title="Удалить тему">
+                <DeleteOutlined />
+              </Tooltip>
             </td>
           </tr>
         ))}

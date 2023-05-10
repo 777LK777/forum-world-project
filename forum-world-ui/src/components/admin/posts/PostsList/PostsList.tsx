@@ -1,20 +1,36 @@
-import { IPost } from "@/models/IPost";
+// outside
+import { useRef } from 'react';
+import { useGesture } from 'react-use-gesture';
 import { useAppDispatch } from '@/hooks/_shared/redux';
+
+// css
+import classes from './PostsList.module.scss';
+
+// ant design
+// tooltip
+import { Tooltip } from 'antd';
+// icons
+import {
+  DeleteOutlined,
+  ToolOutlined
+} from '@ant-design/icons';
+
+// models
+import { IPost } from "@/models/IPost";
+
+// slices
 import { isDeleteConfirm, openDeleteModal } from "@/store/admin/countries/slices/deleteConfirmModal";
 import { setPostForDelete } from "@/store/admin/posts/slices/postsPageSlice";
 import { openUpdatePost } from "@/store/admin/posts/slices/updatePostModalSlice";
-import { useRef } from 'react';
-import { useGesture } from 'react-use-gesture';
-import classes from './PostsList.module.scss';
-import Image from 'next/image';
 
 interface IPostsListProps {
     data: IPost[] | undefined;
 }
 
 const PostsList: React.FC<IPostsListProps> = ( { data } ) => {
+    
+    // PREPARE
     const dispatch = useAppDispatch();
-
     const currentPostRef = useRef<IPost>();
 
     const bind = useGesture({
@@ -73,20 +89,14 @@ const PostsList: React.FC<IPostsListProps> = ( { data } ) => {
               <td id={`${post.id}`} className={classes.td}>{post.countryId}</td>
               <td id={`${post.id}`} className={classes.td}>{post.themeId}</td>
               <td onClick={() => handleUpdateClick(post)} className={classes.icons}>
-               <Image
-                  src="/images/editIcon.png"
-                  alt='edit'
-                  width={30}
-                  height={30}
-                />
+                <Tooltip title="Редактировать пост">
+                  <ToolOutlined />
+                </Tooltip>
               </td>
               <td onClick={() => handleDeleteClick(post)} className={classes.icons}>
-                <Image
-                  src="/images/deleteIcon.png"
-                  alt='delete'
-                  width={30}
-                  height={30}
-                />
+                <Tooltip title="Удалить пост">
+                  <DeleteOutlined />
+                </Tooltip>
               </td>
             </tr>
           ))}

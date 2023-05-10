@@ -51,23 +51,22 @@ const ContentEditorModal: React.FC = () => {
     return (
         (
             <div className={classes.modalBackdrop}>
-            <div className={classes.modal}>
-            <div className={classes.modalContent}>
-                <Editor content={data.data} onChange={handleContentChange}/>
-            </div>
-
-                <div className={classes.modalButtons}>
-                <button onClick={handleDeclineConfirm} className={classes.modalCancelButton}>
-                    Отмена
-                </button>
-                <button onClick={handleDeleteConfirm} className={classes.modalConfirmButton}>
-                    Удалить
-                </button>
-                <button onClick={handleSaveConfirm} className={classes.modalSaveButton}>
-                    Сохранить
-                </button>
-            </div>
-            </div>
+                <div className={classes.modal}>
+                    <div className={classes.modalContent}>
+                        <Editor content={data.data} onChange={handleContentChange}/>
+                    </div>
+                    <div className={classes.modalButtons}>
+                        <button onClick={handleDeclineConfirm} className={classes.modalCancelButton}>
+                            Отмена
+                        </button>
+                        <button onClick={handleDeleteConfirm} className={classes.modalDeleteButton}>
+                            Удалить
+                        </button>
+                        <button onClick={handleSaveConfirm} className={classes.modalSaveButton}>
+                            Сохранить
+                        </button>
+                    </div>
+                </div>
             </div>
         )
     );
