@@ -32,8 +32,6 @@ export class PostsRepository {
     constructor(private readonly prismaService: PrismaService) { }
 
     async getPosts(): Promise<PostDto[]> {
-
-        console.log(this.selectCUD)
         const res = await this.prismaService.post.findMany({
             select: this.selectCUD
         })

@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
+
 import { CountriesService } from './countries.service';
 import { CountriesController } from './countries.controller';
-import { CoreApiModule } from 'src/core-api/_shared/core-api-module/core-api.module';
+import { DatabaseModule } from 'src/database/database.module';
+import { CountriesRepository } from './repositories/countries.repository';
 
 @Module({
-  imports: [CoreApiModule.forFeature('/admin/countries')],
-  providers: [CountriesService],
+  imports: [DatabaseModule],
+  providers: [CountriesService, CountriesRepository],
   controllers: [CountriesController]
 })
 export class CountriesModule {}
