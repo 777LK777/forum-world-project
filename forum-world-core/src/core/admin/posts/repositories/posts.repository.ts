@@ -117,7 +117,7 @@ export class PostsRepository {
 
     async removePost(postId: number): Promise<PostDto> {
         const res = await this.prismaService.post.delete({
-            where: { postId: postId},
+            where: { postId: +postId},
             select: this.selectCUD
         })
         
