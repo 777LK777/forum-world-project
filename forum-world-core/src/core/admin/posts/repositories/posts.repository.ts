@@ -89,6 +89,7 @@ export class PostsRepository {
             },
             data: {
                 name: dto.name,
+                countryId: dto.country.id,
                 themeId: dto.theme?.id
             },
             select: this.selectCUD

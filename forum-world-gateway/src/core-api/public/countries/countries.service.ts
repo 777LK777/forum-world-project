@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 
-import { CountryDto as Country } from './dto/country-dto';
+import { CountryDto as Country } from '../dto/country-dto';
 import { CoreApiService } from 'src/core-api/_shared/core-api-module/core-api.service';
 
 @Injectable()

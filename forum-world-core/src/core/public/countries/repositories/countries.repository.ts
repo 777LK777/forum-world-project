@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 import { PrismaService } from "src/database/prisma.service";
-import { CountryDto as Country } from "../dto/country-dto";
+import { CountryDto as Country } from "../../dto/country-dto";
 
 @Injectable()
 export class CountriesRepository {

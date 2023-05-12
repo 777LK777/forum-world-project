@@ -1,9 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { CountryDto as Country } from './dto/country-dto';
+import { CountryDto as Country } from '../dto/country-dto';
 import { CountriesService } from './countries.service';
 
-@Controller('api/public/countries')
+@Controller('api/public')
 export class CountriesController {
     
     constructor(private readonly countriesService:  CountriesService) { }

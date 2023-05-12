@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
-import { CountriesModule } from './countries/countries.module';
+import { PublicController } from './public.controller';
+import { PublicService } from './public.service';
+import { CoreApiModule } from '../_shared/core-api-module/core-api.module';
 
 @Module({
-  imports: [CountriesModule]
+  imports: [CoreApiModule.forFeature('/public')],
+  controllers: [PublicController],
+  providers: [PublicService]
 })
 export class PublicModule {}
