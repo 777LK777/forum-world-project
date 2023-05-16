@@ -23,9 +23,8 @@ export const postsApi = createApi({
                 method: "POST",
                 body: {
                     name: post.name,
-                    countryId: post.countryId,
-                    themeId: post.themeId,
-                    contentId: post.contentId
+                    countryId: post.country.id,
+                    themeId: post.theme?.id
                 },
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8'
@@ -38,9 +37,7 @@ export const postsApi = createApi({
                 url: "posts",
                 method: "PUT",
                 body: {
-                    name: post.name,
-                    countryId: post.countryId,
-                    themeId: post.themeId
+                    ...post
                 },
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8'

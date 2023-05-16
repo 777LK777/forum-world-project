@@ -1,5 +1,4 @@
 import { IPost } from "@/models/IPost";
-import { ITheme } from "@/models/ITheme";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface IPostsState {

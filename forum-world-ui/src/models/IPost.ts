@@ -1,7 +1,13 @@
 export interface IPost {
     readonly id?: number,
     name: string,
-    countryId: number,
-    themeId?: number,
+    country: {
+        id: number,
+        name: string
+    },
+    theme?: {
+        id: number,
+        name: string
+    },
     contentId?: number
 }

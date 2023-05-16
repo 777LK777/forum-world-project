@@ -18,7 +18,6 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     margin-bottom: 2rem;
     & button {
         width: 140px;
@@ -33,7 +32,7 @@
     position: fixed;
     top: 2.6rem; 
     right: 2rem;
-    z-index: 2;
+    z-index: 9999;
     @media screen and ($tablet) {
         display: none;
     }
@@ -97,4 +96,9 @@
       transform: scale(1.2);
     }
   }
+}
+
+.input {
+  width: 100%;
+  max-width: 60rem;
 }

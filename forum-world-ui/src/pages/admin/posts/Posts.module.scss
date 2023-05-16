@@ -18,7 +18,6 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     margin-bottom: 2rem;
     & button {
         width: 140px;
@@ -27,6 +26,16 @@
             background-color: $bgAddBtnHover;
         }
     }
+}
+
+.hamburger__container {
+  position: fixed;
+  top: 2.6rem; 
+  right: 2rem;
+  z-index: 9999;
+  @media screen and ($tablet) {
+      display: none;
+  }
 }
 
 .hamburger {
@@ -89,28 +98,37 @@
   }
 }
 
-.dropdownContainer {
-  position: relative;
-  max-height: 10rem;
-}
+// .dropdownContainer {
+//   position: relative;
+//   max-height: 10rem;
+// }
 
-.dropdown {
-  padding: .5rem 0;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  max-height: 10rem;
-  width: 59.9rem;
-  overflow-y: auto;
-  position: absolute;
-  top: 3.5rem;
-  left: 0;
-  background-color: white;
+// .dropdown {
+//   padding: .5rem;
+//   border-radius: 1rem;
+//   font-size: 1.5rem;
+//   margin-bottom: 1.5rem;
+//   max-height: 10rem;
+//   width: 59.9rem;
+//   overflow-y: auto;
+//   position: absolute;
+//   top: 3.5rem;
+//   left: 0;
+//   background-color: white;
+//   z-index: 1;
+//   box-shadow: 1px 1px 5px #000;
+//   &__item {
+//     cursor: pointer;
+//     margin-bottom: 0.5rem;
+//     &:hover {
+//       background-color: $bgTableGrey;
+//     }
+//   }
+// }
+
+.input {
+  position: relative;
   z-index: 1;
-  &__item {
-    cursor: pointer;
-    margin-bottom: 0.5rem;
-    &:hover {
-      background-color: $bgTableGrey;
-    }
-  }
+  width: 100%;
+  max-width: 60rem;
 }
