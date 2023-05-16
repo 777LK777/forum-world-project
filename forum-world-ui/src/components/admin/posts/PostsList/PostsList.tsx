@@ -86,8 +86,13 @@ const PostsList: React.FC<IPostsListProps> = ( { data } ) => {
               {...bind()}
             >
               <td id={`${post.id}`} className={classes.td}>{post.name}</td>
-              <td id={`${post.id}`} className={classes.td}>{post.countryId}</td>
-              <td id={`${post.id}`} className={classes.td}>{post.themeId}</td>
+              <td id={`${post.id}`} className={classes.td}>{post.country.name}</td>
+              <td id={`${post.id}`} className={classes.td}>
+                { post.theme ?
+                  post.theme.name :
+                  <b>Пост без темы</b>
+                }
+              </td>
               <td onClick={() => handleUpdateClick(post)} className={classes.icons}>
                 <Tooltip title="Редактировать пост">
                   <ToolOutlined />

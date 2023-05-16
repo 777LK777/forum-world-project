@@ -10,6 +10,7 @@ import DeleteConfirmModal from '@/components/_shared/DeleteConfirmModal/DeleteCo
 import { closeDeleteModal, resetDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
 import { closeUpdateTheme } from '@/store/admin/themes/slices/updateThemeModalSlice';
 import UpdateThemeModal from '@/components/admin/themes/UpdateThemeModal/UpdateThemeModal';
+import { Form, Input } from 'antd';
 
 const Themes = () => {
     const { data } = useGetAllThemesQuery();
@@ -34,6 +35,8 @@ const Themes = () => {
         dispatch(resetDeleteModal());
     }, [isDeleteSelected])
 
+    const [form] = Form.useForm();
+
     const addThemeHandle = async (e: any) => {
         e.preventDefault();
         if (themeValue.length < 2) {
@@ -50,6 +53,7 @@ const Themes = () => {
                 name: themeValue,
                 pathFragment: pathValue
             })
+            form.resetFields();
             setThemeValue('');
             setPathValue('');
         } catch (error) {
@@ -92,19 +96,29 @@ const Themes = () => {
             <AdminSidebar open={hamburgerOpened}/>
             <div className={classes.main}>
                 <h1 className={classes.title}>Управление темами</h1>
-                <form className={classes.form}> 
-                    <AppInput
+                <Form form={form} className={classes.form}> 
+                  <Form.Item name="name" rules={[{ required: true, message: 'Имя темы не может быть пустым' }]}>
+                    <Input
+                        allowClear
                         placeholder="Add theme"
                         value={themeValue}
                         onChange={(e: any) => setThemeValue(e.target.value)}
+                        className={classes.input}
                     />
-                    <AppInput
+                  </Form.Item>
+                  <Form.Item name="path" rules={[{ required: true, message: 'Путь темы не может быть пустым' }]}>
+                    <Input
+                        allowClear
                         placeholder="Add path"
                         value={pathValue}
                         onChange={(e: any) => setPathValue(e.target.value)}
+                        className={classes.input}
                     />
+                  </Form.Item>
+                  <Form.Item>
                     <AppButton children="Добавить тему" onClick={addThemeHandle}/>
-                </form>
+                  </Form.Item>
+                </Form>
                 {
                     (data! && data.length!) > 0 ? (
                         <ThemesList 

@@ -31,6 +31,7 @@ import { closeUpdateCountry } from '@/store/admin/countries/slices/updateCountry
 import { openContentEditorModal, resetContentEditorModal } from '@/store/admin/_shared/slices/contentEditorModalSlice';
 import { openDeleteModal, resetDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
 import { resetCountryPageSlice } from '@/store/admin/countries/slices/countriesPageSlice';
+import { Form, Input } from 'antd';
 
 
 const Countries = () => {
@@ -46,6 +47,8 @@ const Countries = () => {
   const [nameValue, setNameValue] = useState('');
   const [flagValue, setFlagValue] = useState('');
   const [pathValue, setPathValue] = useState('');
+
+  const [form] = Form.useForm()
 
   const addCountryHandle = async (e: any) => {
     e.preventDefault();
@@ -67,6 +70,7 @@ const Countries = () => {
         pathFragment: pathValue,
         flagImageUrl: flagValue,
       });
+      form.resetFields();
       setNameValue('');
       setFlagValue('');
       setPathValue('');
@@ -188,32 +192,46 @@ const Countries = () => {
             </div>
         }
       </div>
-
-      
       <AdminSidebar open={hamburgerOpened}/>
       <div className={classes.main}>
         <h1 className={classes.title}>Управление странами</h1>
-        <form className={classes.form}>
-          <AppInput 
-              placeholder="Add country name" 
+        <Form form={form} className={classes.form}>
+          <Form.Item name="name" rules={[{ required: true, message: 'Название не может быть пустым' }]}>
+            <Input 
+              allowClear
+              placeholder="Добавьте название страны" 
               value={nameValue} 
               onChange={(e: any) => setNameValue(e.target.value)} 
+              className={classes.input}
           />
-          <AppInput
-            placeholder="Add country flagURL"
-            value={flagValue}
-            onChange={(e: any) => setFlagValue(e.target.value)}
-          />
-          <AppInput 
-              placeholder="Add country path" 
+          </Form.Item>
+          <Form.Item name="url" rules={[{ required: true, message: 'URL не может быть пустым' }]}>
+            <Input
+              allowClear
+              placeholder="Добавьте URL флага"
+              value={flagValue}
+              onChange={(e: any) => setFlagValue(e.target.value)}
+              className={classes.input}
+            />
+          </Form.Item>
+          <Form.Item name="path" rules={[{ required: true, message: 'Путь не может быть пустым' }]}>
+            <Input
+              allowClear 
+              placeholder="Добавьте путь флага" 
               value={pathValue} 
               onChange={(e: any) => setPathValue(e.target.value)} 
-          />
-          <AppButton children="Добавить страну" onClick={addCountryHandle} />
-        </form>
+              className={classes.input}
+            />
+          </Form.Item>
+          <Form.Item>
+            <AppButton children="Добавить страну" onClick={addCountryHandle} />
+          </Form.Item>
+        </Form>
         {
           (data! && data.length!) > 0 ? (
-            <CountriesList data={data}/>
+            <CountriesList 
+              data={data}
+            />
           ) : null
         }
       </div>
