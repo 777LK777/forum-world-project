@@ -1,13 +1,10 @@
 import { Module } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { PostsController } from './posts.controller';
-import { HttpModule } from '@nestjs/axios';
 import { CoreApiModule } from 'src/core-api/_shared/core-api-module/core-api.module';
 
 @Module({
-  imports: [
-    HttpModule,
-    CoreApiModule.forFeature('/admin/posts')],
+  imports: [CoreApiModule.forFeature('/admin/posts')],
   providers: [PostsService],
   controllers: [PostsController]
 })

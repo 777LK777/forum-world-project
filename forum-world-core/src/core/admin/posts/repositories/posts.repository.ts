@@ -32,8 +32,6 @@ export class PostsRepository {
     constructor(private readonly prismaService: PrismaService) { }
 
     async getPosts(): Promise<PostDto[]> {
-
-        console.log(this.selectCUD)
         const res = await this.prismaService.post.findMany({
             select: this.selectCUD
         })
@@ -91,6 +89,7 @@ export class PostsRepository {
             },
             data: {
                 name: dto.name,
+                countryId: dto.country.id,
                 themeId: dto.theme?.id
             },
             select: this.selectCUD
@@ -117,7 +116,7 @@ export class PostsRepository {
 
     async removePost(postId: number): Promise<PostDto> {
         const res = await this.prismaService.post.delete({
-            where: { postId: postId},
+            where: { postId: +postId},
             select: this.selectCUD
         })
         
