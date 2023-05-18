@@ -6,9 +6,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/_shared/redux';
 import classes from './Countries.module.scss';
 
 // components
-import AppInput from '@/components/_shared/UI/AppInput/AppInput';
 import AppButton from '@/components/_shared/UI/AppButton/AppButton';
-import AdminSidebar from '@/components/admin/countries/AdminSidebar/AdminSidebar';
+import AdminSidebar from '@/components/_shared/AdminSidebar/AdminSidebar';
 import CountriesList from '@/components/admin/countries/CountriesList/CountriesList';
 
 // modals

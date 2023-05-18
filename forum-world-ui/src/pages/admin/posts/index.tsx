@@ -1,17 +1,15 @@
 // outside
 import { useState, useEffect } from "react";
-import { useDebounce } from "@/hooks/_shared/debounce";
 import { useAppDispatch, useAppSelector } from "@/hooks/_shared/redux";
 
 // css
 import classes from './Posts.module.scss'
 
 // antd
-import { Select, Input, Form, Button } from "antd";
+import { Select, Input, Form } from "antd";
 
 // components
-import AdminSidebar from "@/components/admin/countries/AdminSidebar/AdminSidebar";
-import AppInput from "@/components/_shared/UI/AppInput/AppInput";
+import AdminSidebar from "../../../components/_shared/AdminSidebar/AdminSidebar";
 import AppButton from "@/components/_shared/UI/AppButton/AppButton";
 import PostsList from "@/components/admin/posts/PostsList/PostsList";
 import DeleteConfirmModal from "@/components/_shared/DeleteConfirmModal/DeleteConfirmModal";
@@ -26,8 +24,8 @@ import {
 } from "@/store/admin/posts/posts.api";
 import { closeDeleteModal, resetDeleteModal } from "@/store/admin/countries/slices/deleteConfirmModal";
 import { closeUpdatePost } from "@/store/admin/posts/slices/updatePostModalSlice";
-import { useGetAllThemesQuery, useGetThemesByNameFragmentQuery } from "@/store/admin/themes/themes.api";
-import { useGetAllCountriesQuery, useGetCountriesByNameFragmentQuery } from "@/store/admin/countries/countries.api";
+import { useGetAllThemesQuery } from "@/store/admin/themes/themes.api";
+import { useGetAllCountriesQuery } from "@/store/admin/countries/countries.api";
 
 const Posts = () => {
     const { data } = useGetAllPostsQuery();

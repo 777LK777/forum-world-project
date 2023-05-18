@@ -1,6 +1,6 @@
 import AppInput from '@/components/_shared/UI/AppInput/AppInput';
-import classes from './Themes.module.scss'
-import AdminSidebar from "@/components/admin/countries/AdminSidebar/AdminSidebar";
+import classes from './Themes.module.scss';
+import AdminSidebar from '@/components/_shared/AdminSidebar/AdminSidebar';
 import { useState, useEffect } from 'react';
 import AppButton from '@/components/_shared/UI/AppButton/AppButton';
 import { useChangeThemeMutation, useCreateThemeMutation, useDeleteThemeMutation, useGetAllThemesQuery } from '@/store/admin/themes/themes.api';

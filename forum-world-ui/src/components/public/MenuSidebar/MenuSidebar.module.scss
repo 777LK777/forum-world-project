@@ -1,0 +1,106 @@
+@import "../../../styles/vars.scss";
+$countItems: 4;
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid $bgTableLigthGrey;
+    border-top: none;
+    width: 25rem;
+    height: 100vh;
+    padding: 1rem 0;
+    display: none;
+    @media ($tablet) {
+        display: block;
+    }
+}
+
+.open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 2.5rem 3rem;
+    z-index: 100;
+}
+
+.top {
+    @media ($tablet) {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem;
+        align-items: center;
+        border-bottom: 1px solid $bgTableLigthGrey;
+    }
+}
+
+.return {
+    display: none;
+    @media ($tablet) {
+      display: block;
+      font-size: 4rem;
+      margin-right: .5rem;
+      transition: all .3s ease-in;
+      &:hover {
+        transform: translateX(-5px);
+      }
+    }
+}
+
+.mainTitle {
+    font-size: 2.3rem;
+}
+
+.itemTitle {
+    font-size: 2rem;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+    &:hover {
+        background-color: $bgTableLigthGrey;
+    }
+    &:active {
+        color: rgb(96, 96, 255);
+        background-color: rgba(173, 216, 230, 0.2);
+    }
+    @media ($tablet) {
+        padding: 0 1rem;
+    }
+}
+
+.list {
+    transition: max-height 0.4s ease-in-out; 
+    max-height: 0; 
+    overflow: hidden;
+    font-size: 1.7rem;
+    width: 100%;
+    &__item {
+        margin-top: .4rem;
+        border-radius: .5rem;
+        transition: background-color .3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+            background-color: $bgTableLigthGrey;
+        }
+        &:active {
+            color: rgb(96, 96, 255);
+            background-color: rgba(173, 216, 230, 0.2);
+        }
+        @media ($tablet) {
+            padding: 0 1rem;
+        }
+    }
+}
+
+.listVisible {
+    max-height: calc(100% - $countItems * 34px - 58px);
+    overflow-y: auto;
+}

@@ -1,20 +1,52 @@
+import { useState, useEffect } from "react";
+
 import axios from "axios";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
 
+// css
+import classes from './countryPathFragment.module.scss';
+
 import { ICountryPageData } from "@/models/pages/ICountryPageData";
 import ContentBlock from "@/components/_shared/ContentBlock/ContentBlock";
+import MenuSidebar from "@/components/public/MenuSidebar/MenuSidebar";
 
 export default function CountryPage({ posts, themes, content, pathFragment, isError }: ICountryPageData) {
-  
+    
+    const [menuActive, setMenuActive] = useState(false)
+    const hamburgerHandle = () => {
+        if (window.innerWidth < 768) setMenuActive(!menuActive)
+    }
     return (
         <div>
-            <h1>COUNTRY PAGE</h1>
-            <ContentBlock data={content?.data} />
             {isError && <h2>Something went wrong...</h2>}
-            {pathFragment && <ul>
-                {themes?.map(t => <li key={t.pathFragment}><Link href={`/countries/${pathFragment}/themes/${t.pathFragment}`}>{t.name}</Link></li>)}
-            </ul>}
+            <div 
+                onClick={hamburgerHandle} 
+                className={classes.hamburger__container}>
+                {
+                menuActive ? 
+                    <div className={classes.close}>
+                    <span className={classes.close__line}></span>
+                    <span className={classes.close__line}></span>
+                    </div>
+                : 
+                    <div className={classes.hamburger}>
+                    <span className={classes.hamburger__line}></span>
+                    <span className={classes.hamburger__line}></span>
+                    <span className={classes.hamburger__line}></span>
+                    </div>
+                }
+            </div>
+            <main className={classes.wrapper}>
+                <MenuSidebar 
+                    items={themes} 
+                    countryPathFragment={pathFragment}
+                    open={menuActive}
+                />
+                <div className={classes.contentContainer}>
+                    <ContentBlock data={content?.data} />
+                </div>
+            </main>
         </div>
     )
 }
