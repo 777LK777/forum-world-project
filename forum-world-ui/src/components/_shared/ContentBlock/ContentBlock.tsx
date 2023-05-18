@@ -3,6 +3,9 @@ import { OutputData } from "@editorjs/editorjs";
 // @ts-ignore
 import edjsHTML from "editorjs-html"
 
+// css
+import classes from './ContentBlock.module.scss';
+
 interface IContentBlockProps {
     data: OutputData
 };
@@ -21,7 +24,7 @@ const ContentBlock: React.FC<IContentBlockProps> = ({ data }) => {
 
     return (
         <>
-            <div dangerouslySetInnerHTML={{__html: html}}></div>        
+            <div className={classes.contentWrapper} dangerouslySetInnerHTML={{__html: html}}></div>        
         </>
     );
 };

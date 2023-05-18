@@ -1,0 +1,23 @@
+.contentWrapper {
+    padding: 1rem;
+    font-size: 2rem;
+    & h1 {
+        font-size: 4rem;
+        margin-top: 1rem;
+    }
+    & p {
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+    & img {
+        width: 100%;
+        margin-top: 1rem;
+    }
+    & blockquote {
+        font-size: 2rem;
+        border-left: 4px solid #ddd;
+        padding-left: 10px;
+        font-style: italic;
+        color: #888;
+    }
+}
