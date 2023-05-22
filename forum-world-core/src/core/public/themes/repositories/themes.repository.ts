@@ -12,19 +12,21 @@ export class ThemesRepository {
         const res = await this.prismaService.theme.findMany({
             select: {
                 name: true,
-                pathFragment: true
+                pathFragment: true,                
             },
             where: {
                 posts: {
-                    every: {
+                    some: {
                         country: {
-                            pathFragment: countryPathFragment
+                            is: {
+                                pathFragment: countryPathFragment
+                            }
                         }
                     }
                 }
             }
         })
-
+        
         return res.map(t => { return {name: t.name, pathFragment: t.pathFragment}})
     }
 }
