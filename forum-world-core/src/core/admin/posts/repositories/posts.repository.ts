@@ -73,8 +73,6 @@ export class PostsRepository {
             data: { ...dto },
             select: this.selectCUD
         })
-
-        console.log(res)
         
         const country = new Country(res.countryId, res.country.name);
         const theme = !res.themeId ? undefined : new Theme(res.themeId, res.theme.name);
