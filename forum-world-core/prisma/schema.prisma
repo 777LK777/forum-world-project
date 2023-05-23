@@ -47,10 +47,19 @@ model Post {
   content Content? @relation(fields: [contentId], references: [contentId], onDelete: Restrict)
 }
 
+model Page {
+  pageId Int @id @default(autoincrement())
+  name String
+  pathFragment String
+  contentId Int?
+  content Content? @relation(fields: [contentId], references: [contentId], onDelete: Restrict)
+}
+
 model Content {
   contentId Int @id @default(autoincrement())
   data Json
   posts Post[]
   themes Theme[]
   country Country[]
+  pages Page[]
 }
