@@ -12,6 +12,7 @@ import { Tooltip } from 'antd';
 // icons
 import {
   DeleteOutlined,
+  FormOutlined,
   ToolOutlined
 } from '@ant-design/icons';
 
@@ -20,7 +21,7 @@ import { IPost } from "@/models/IPost";
 
 // slices
 import { isDeleteConfirm, openDeleteModal } from "@/store/admin/countries/slices/deleteConfirmModal";
-import { setPostForDelete } from "@/store/admin/posts/slices/postsPageSlice";
+import { setPostForDelete, setPostToContentEdit } from "@/store/admin/posts/slices/postsPageSlice";
 import { openUpdatePost } from "@/store/admin/posts/slices/updatePostModalSlice";
 
 interface IPostsListProps {
@@ -67,6 +68,10 @@ const PostsList: React.FC<IPostsListProps> = ( { data } ) => {
         dispatch(openUpdatePost(post));
     }
 
+    const handleOpenContentEditor = (post: IPost) => {
+      dispatch(setPostToContentEdit(post))
+    }    
+
     return (
         <table className={classes.table}>
         <thead>
@@ -92,6 +97,11 @@ const PostsList: React.FC<IPostsListProps> = ( { data } ) => {
                   post.theme.name :
                   <b>Пост без темы</b>
                 }
+              </td>
+              <td onClick={() => handleOpenContentEditor(post)} className={classes.icons}>
+                <Tooltip title="Редактировать контент">
+                  <FormOutlined/>
+                </Tooltip>
               </td>
               <td onClick={() => handleUpdateClick(post)} className={classes.icons}>
                 <Tooltip title="Редактировать пост">
