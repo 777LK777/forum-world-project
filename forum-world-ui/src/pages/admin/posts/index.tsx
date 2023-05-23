@@ -18,36 +18,33 @@ import UpdatePostModal from "@/components/admin/posts/UpdatePostModal/UpdatePost
 // slices
 import { 
     useChangePostMutation, 
+    useCreatePostContentMutation, 
     useCreatePostMutation, 
+    useDeletePostContentMutation, 
     useDeletePostMutation, 
-    useGetAllPostsQuery 
+    useGetAllPostsQuery, 
+    useLazyGetPostContentQuery, 
+    useUpdatePostContentMutation
 } from "@/store/admin/posts/posts.api";
 import { closeDeleteModal, resetDeleteModal } from "@/store/admin/countries/slices/deleteConfirmModal";
 import { closeUpdatePost } from "@/store/admin/posts/slices/updatePostModalSlice";
 import { useGetAllThemesQuery } from "@/store/admin/themes/themes.api";
 import { useGetAllCountriesQuery } from "@/store/admin/countries/countries.api";
+import { openContentEditorModal, resetContentEditorModal } from "@/store/admin/_shared/slices/contentEditorModalSlice";
+import { resetPostPageSlice } from "@/store/admin/posts/slices/postsPageSlice";
+import ContentEditorModal from "@/components/_shared/ContentEditorModal/ContentEditorModal";
 
 const Posts = () => {
-    const { data } = useGetAllPostsQuery();
-    const [ createPost ] = useCreatePostMutation();
-    const [ deletePost ] = useDeletePostMutation();
-    const [ updatePost ] = useChangePostMutation();
-    console.log(data)
-    const [postValue, setPostValue] = useState('');
 
+    // PREPARE
     const dispatch = useAppDispatch();
+    const { data } = useGetAllPostsQuery();
     const {postToDelete, postToUpdate} = useAppSelector(state => state.postsPageSlice);
-    const { isOpen: isDeleteModalOpen, isDeleteSelected } = useAppSelector(state => state.deleteModalSlice);
-    const {isOpen} = useAppSelector(state => state.updatePostModalSlice)
 
-    useEffect(() => {
-        dispatch(closeDeleteModal());
-        if (!postToDelete?.id) return;
-        if (!isDeleteSelected) return;
-        deletePost(postToDelete.id);
-        dispatch(resetDeleteModal());
-    }, [isDeleteSelected])
-
+    // POST
+    // create
+    const [ createPost ] = useCreatePostMutation();
+    const [postValue, setPostValue] = useState('');
     const [searchCountry, setSearchCountry] = useState('');
     const [countryId, setCountryId] = useState(undefined);
     const { data: allCountries} = useGetAllCountriesQuery()
@@ -99,13 +96,79 @@ const Posts = () => {
             alert('Не удалось добавить пост');
         }
     }
+    
+    // update 
+    const [ updatePost ] = useChangePostMutation();
 
     useEffect(() => {
         dispatch(closeUpdatePost());
         if (!postToUpdate) return;
         updatePost(postToUpdate);
     }, [postToUpdate])
+    
+    // delete
+    const [ deletePost ] = useDeletePostMutation();
+    const { isOpen: isDeleteModalOpen, isDeleteSelected } = useAppSelector(state => state.deleteModalSlice);
+    const {isOpen} = useAppSelector(state => state.updatePostModalSlice)
+    
+    useEffect(() => {
+        dispatch(closeDeleteModal());
+        if (!postToDelete?.id) return;
+        if (!isDeleteSelected) return;
+        deletePost(postToDelete.id);
+        dispatch(resetDeleteModal());
+    }, [isDeleteSelected])
 
+    // CONTENT
+    const {isOpen: isOpenContentEditorModal, contentToSave, isDeleteConfirm: isDeleteContentSelected, isEditDeclined: isContentEditDeclined } = useAppSelector(state => state.contentEditorModalSlice)
+
+    // create/update
+    const [createContent] = useCreatePostContentMutation();
+    const [updateContent] = useUpdatePostContentMutation();
+    const { postToContentEdit } = useAppSelector(state => state.postsPageSlice);
+    const [getPostContent, results] = useLazyGetPostContentQuery();
+
+    useEffect(() => {
+        if (!postToContentEdit) return;
+        getPostContent(postToContentEdit);
+    }, [postToContentEdit]);
+
+    useEffect(() => {
+        if (!results.data) return;
+        if (results.isFetching) return;
+        if (results.data.id === 0) dispatch(openContentEditorModal(results.data));
+        else dispatch(openContentEditorModal(results.data));
+    }, [results])
+
+    useEffect(() => {
+        if (!postToContentEdit?.id) return;
+        if (!contentToSave) return;
+
+        if (!contentToSave.id) createContent({postId: postToContentEdit.id, content: contentToSave});
+        else updateContent({postId: postToContentEdit.id, content: contentToSave});
+
+        dispatch(resetContentEditorModal())
+        dispatch(resetPostPageSlice())
+    }, [contentToSave])
+
+    // delete 
+    const [deleteContent] = useDeletePostContentMutation();
+    useEffect(() => {
+        if (!postToContentEdit?.id) return;
+        if (!isDeleteContentSelected) return;
+        deleteContent(postToContentEdit.id);
+
+        dispatch(resetContentEditorModal());
+        dispatch(resetPostPageSlice());
+    },[isDeleteContentSelected])
+
+    // edit decline
+    useEffect(() => {
+        dispatch(resetContentEditorModal());
+        dispatch(resetPostPageSlice());
+    }, [isContentEditDeclined])
+
+    // hamburger
     const [hamburgerOpened, setHamburgerOpened] = useState(false)
     const hamburgerHandle = () => {
       if (window.innerWidth < 768) setHamburgerOpened(!hamburgerOpened);
@@ -113,6 +176,7 @@ const Posts = () => {
 
     return (
         <div>
+            { isOpenContentEditorModal && <ContentEditorModal/> }
             {isDeleteModalOpen && (<DeleteConfirmModal message="Вы хотите удалить пост?"/>)}
             {isOpen && <UpdatePostModal/>}
             <div onClick={hamburgerHandle} className={classes.hamburger__container}>

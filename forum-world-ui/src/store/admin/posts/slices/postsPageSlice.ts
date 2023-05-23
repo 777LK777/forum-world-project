@@ -4,11 +4,13 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export interface IPostsState {
     postToDelete?: IPost
     postToUpdate?: IPost
+    postToContentEdit?: IPost
 }
 
 const initialState: IPostsState = {
     postToDelete: undefined,
-    postToUpdate: undefined
+    postToUpdate: undefined,
+    postToContentEdit: undefined
 }
 
 const postsPageSlice = createSlice({
@@ -20,10 +22,16 @@ const postsPageSlice = createSlice({
         },
         setPostForUpdate(state, action: PayloadAction<IPost>) {
             state.postToUpdate = action.payload
+        },
+        setPostToContentEdit(state, action: PayloadAction<IPost>) {
+            state.postToContentEdit = action.payload
+        },
+        resetPostPageSlice() {
+            return initialState
         }
     }
 })
 
-export const {setPostForDelete, setPostForUpdate} = postsPageSlice.actions;
+export const { setPostForDelete, setPostForUpdate, setPostToContentEdit, resetPostPageSlice } = postsPageSlice.actions;
 
 export default postsPageSlice.reducer;
