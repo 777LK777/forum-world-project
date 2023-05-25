@@ -25,6 +25,9 @@ const updatePostModalSlice = createSlice({
     }
 })
 
-export const { openUpdatePost, closeUpdatePost } = updatePostModalSlice.actions;
+export const { 
+    openUpdatePost, 
+    closeUpdatePost 
+} = updatePostModalSlice.actions;
 
 export default updatePostModalSlice.reducer;

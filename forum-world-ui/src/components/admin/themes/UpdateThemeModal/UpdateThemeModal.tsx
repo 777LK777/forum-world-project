@@ -1,8 +1,14 @@
+// outside
 import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from "@/hooks/_shared/redux";
+
+// css
 import classes from './UpdateThemeModal.module.scss';
 
-import { useAppDispatch, useAppSelector } from "@/hooks/_shared/redux";
+// models
 import { ITheme } from '@/models/ITheme';
+
+//slices
 import { setThemeForUpdate } from '@/store/admin/themes/slices/themesPageSlice';
 import { closeUpdateTheme } from '@/store/admin/themes/slices/updateThemeModalSlice';
 
@@ -24,7 +30,7 @@ const UpdateThemeModal = () => {
     };
 
     return (
-        <div className={classes.modalBackdrop}>
+      <div className={classes.modalBackdrop}>
         <div className={classes.modal}>
           <div className={classes.modalMessage}>
             <p>Страна:</p>

@@ -1,4 +1,4 @@
-@import '@/styles/vars.scss';
+@import '../../../../styles/vars.scss';
 
 .modalBackdrop {
     position: fixed;
@@ -76,4 +76,3 @@
 .modalConfirmButton:hover {
     background-color: $bgDeleteButtonHoverColor;
 }
-  
