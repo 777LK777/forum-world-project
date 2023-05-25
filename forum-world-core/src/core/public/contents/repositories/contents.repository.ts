@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/database/prisma.service";
+import { ContentDto } from "../dto/content-dto";
 
 @Injectable()
 export class ContentsRepository {
@@ -18,5 +19,18 @@ export class ContentsRepository {
         })
 
         return { ...res }
+    }
+
+    async getContent(contentId: number): Promise<ContentDto> {
+        const res = await this.prismaService.content.findFirst({
+            select: {
+                data: true
+            },
+            where: {
+                contentId: +contentId
+            }
+        });
+
+        return { ...res };
     }
 }
