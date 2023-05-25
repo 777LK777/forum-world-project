@@ -1,11 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { CountriesRepository } from './repositories/countries.repository';
-import { CountryDto as Country } from '../dto/country-dto';
-import { CountryPageDto } from '../dto/country-page-dto';
-import { ThemesService } from '../themes/themes.service';
-import { ContentsService } from '../contents/contents.service';
-import { PostsService } from '../posts/posts.service';
+import { CountryDto as Country } from './dto/country-dto';
 
 @Injectable()
 export class CountriesService {
