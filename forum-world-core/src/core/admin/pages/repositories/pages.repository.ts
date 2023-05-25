@@ -76,7 +76,7 @@ export class PagesRepository {
     async removeContent(pageId: number): Promise<PageDto> {
         const res = await this.prismaService.page.update({
             data: { contentId: null },
-            where: { pageId: pageId }
+            where: { pageId: +pageId }
         });
         return new PageDto(res.pageId, res.name, res.pathFragment, res.contentId);
     }
