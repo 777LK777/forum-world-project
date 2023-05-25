@@ -17,12 +17,12 @@ export class PagesService {
     }
 
     async createPage(@Body() dto: CreatePageDto): Promise<PageDto> {
-        const { data } = await firstValueFrom(this.api.post<PageDto>());
+        const { data } = await firstValueFrom(this.api.post<PageDto>(dto));
         return data;
     }
 
     async updatePage(@Body() dto: PageDto): Promise<PageDto> {
-        const { data } = await firstValueFrom(this.api.put<PageDto>());
+        const { data } = await firstValueFrom(this.api.put<PageDto>(dto));
         return data;
     }
 

@@ -45,7 +45,7 @@ export class PagesController {
         return await this.pagesService.updateContent(dto, pageId);
     }
 
-    @Delete('pageId/content')
+    @Delete(':pageId/content')
     async removeContent(@Param('pageId') pageId: number): Promise<ContentDto> {
         return await this.pagesService.removeContent(pageId);
     }
