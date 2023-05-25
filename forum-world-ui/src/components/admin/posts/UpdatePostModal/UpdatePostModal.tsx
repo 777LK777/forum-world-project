@@ -63,7 +63,6 @@ const UpdatePostModal = () => {
         } as IPost;
         dispatch(setPostForUpdate(changedPost));
         dispatch(closeUpdatePost());
-        console.log(changedPost)
     }
     
     return (

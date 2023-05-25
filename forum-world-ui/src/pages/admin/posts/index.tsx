@@ -120,7 +120,12 @@ const Posts = () => {
     }, [isDeleteSelected])
 
     // CONTENT
-    const {isOpen: isOpenContentEditorModal, contentToSave, isDeleteConfirm: isDeleteContentSelected, isEditDeclined: isContentEditDeclined } = useAppSelector(state => state.contentEditorModalSlice)
+    const {
+        isOpen: isOpenContentEditorModal, 
+        contentToSave, 
+        isDeleteConfirm: isDeleteContentSelected, 
+        isEditDeclined: isContentEditDeclined 
+    } = useAppSelector(state => state.contentEditorModalSlice)
 
     // create/update
     const [createContent] = useCreatePostContentMutation();

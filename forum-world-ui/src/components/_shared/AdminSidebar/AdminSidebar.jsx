@@ -7,7 +7,7 @@ const AdminSidebar = ({open}) => {
         <div className={containerClass}>
             <h2 className={classes.title}>Навигация</h2>
             <ul>
-                <Link href="/admin/home"><li className={classes.item}>Главная страница</li></Link>
+                <Link href="/admin/pages"><li className={classes.item}>Базовые страницы</li></Link>
                 <Link href="/admin/countries"><li className={classes.item}>Страны</li></Link>
                 <Link href="/admin/themes"><li className={classes.item}>Темы</li></Link>
                 <Link href="/admin/posts"><li className={classes.item}>Посты</li></Link>

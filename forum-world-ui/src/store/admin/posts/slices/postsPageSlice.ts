@@ -32,6 +32,11 @@ const postsPageSlice = createSlice({
     }
 })
 
-export const { setPostForDelete, setPostForUpdate, setPostToContentEdit, resetPostPageSlice } = postsPageSlice.actions;
+export const { 
+    setPostForDelete, 
+    setPostForUpdate, 
+    setPostToContentEdit, 
+    resetPostPageSlice 
+} = postsPageSlice.actions;
 
 export default postsPageSlice.reducer;

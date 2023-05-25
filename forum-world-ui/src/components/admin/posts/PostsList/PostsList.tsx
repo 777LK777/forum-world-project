@@ -34,6 +34,7 @@ const PostsList: React.FC<IPostsListProps> = ( { data } ) => {
     const dispatch = useAppDispatch();
     const currentPostRef = useRef<IPost>();
 
+    // Touch
     const bind = useGesture({
         onDragEnd: (state) => {
           const targetElement = state.event.target as HTMLElement | null;
@@ -59,6 +60,7 @@ const PostsList: React.FC<IPostsListProps> = ( { data } ) => {
         }
     })
 
+    // handlers
     const handleDeleteClick = (post: IPost) => {
         dispatch(setPostForDelete(post))
         dispatch(openDeleteModal())
@@ -73,7 +75,7 @@ const PostsList: React.FC<IPostsListProps> = ( { data } ) => {
     }    
 
     return (
-        <table className={classes.table}>
+      <table className={classes.table}>
         <thead>
           <tr className={classes.tr}>
             <th className={classes.th}>Пост</th>
