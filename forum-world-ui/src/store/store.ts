@@ -19,9 +19,15 @@ import { postsApi } from "./admin/posts/posts.api";
 import postsPageSlice from "./admin/posts/slices/postsPageSlice";
 import updatePostModalSlice from "./admin/posts/slices/updatePostModalSlice";
 
+// pages
+import { pagesApi } from "./admin/pages/pages.api";
+import pagesPageSlice from "./admin/pages/slices/pagesPageSlice";
+import updatePageModalSlice from "./admin/pages/slices/updatePageModalSlice";
+
 // shared
 import deleteModalSlice from './admin/countries/slices/deleteConfirmModal';
 import contentEditorModalSlice from "./admin/_shared/slices/contentEditorModalSlice";
+
 
 
 const rootReducer = combineReducers({
@@ -35,6 +41,9 @@ const rootReducer = combineReducers({
     [postsApi.reducerPath]: postsApi.reducer,
     postsPageSlice,
     updatePostModalSlice,
+    [pagesApi.reducerPath]: pagesApi.reducer,
+    pagesPageSlice,
+    updatePageModalSlice,
     
     deleteModalSlice,
     contentEditorModalSlice,
@@ -47,6 +56,7 @@ export const store = configureStore({
         .concat(countriesApi.middleware)
         .concat(themesApi.middleware)
         .concat(postsApi.middleware)
+        .concat(pagesApi.middleware)
 })
 
 export type RootState = ReturnType<typeof rootReducer>

@@ -1,39 +1,43 @@
-import AppInput from '@/components/_shared/UI/AppInput/AppInput';
-import classes from './Themes.module.scss';
-import AdminSidebar from '@/components/_shared/AdminSidebar/AdminSidebar';
+// outside
 import { useState, useEffect } from 'react';
-import AppButton from '@/components/_shared/UI/AppButton/AppButton';
-import { useChangeThemeMutation, useCreateThemeMutation, useDeleteThemeMutation, useGetAllThemesQuery } from '@/store/admin/themes/themes.api';
-import ThemesList from '../../../components/admin/themes/ThemesList/ThemesList';
 import { useAppDispatch, useAppSelector } from '@/hooks/_shared/redux';
-import DeleteConfirmModal from '@/components/_shared/DeleteConfirmModal/DeleteConfirmModal';
-import { closeDeleteModal, resetDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
-import { closeUpdateTheme } from '@/store/admin/themes/slices/updateThemeModalSlice';
-import UpdateThemeModal from '@/components/admin/themes/UpdateThemeModal/UpdateThemeModal';
+
+// css
+import classes from './Themes.module.scss';
+
+// ant design
 import { Form, Input } from 'antd';
 
-const Themes = () => {
-    const { data } = useGetAllThemesQuery();
-    const [ createTheme ] = useCreateThemeMutation();
-    const [ deleteTheme ] = useDeleteThemeMutation();
-    const [ updateTheme ] = useChangeThemeMutation();
+// components
+import AdminSidebar from '@/components/_shared/AdminSidebar/AdminSidebar';
+import AppButton from '@/components/_shared/UI/AppButton/AppButton';
+import ThemesList from '../../../components/admin/themes/ThemesList/ThemesList';
 
+// modals
+import DeleteConfirmModal from '@/components/_shared/DeleteConfirmModal/DeleteConfirmModal';
+import UpdateThemeModal from '@/components/admin/themes/UpdateThemeModal/UpdateThemeModal';
+
+// slices
+import { 
+    useChangeThemeMutation, 
+    useCreateThemeMutation, 
+    useDeleteThemeMutation, 
+    useGetAllThemesQuery 
+} from '@/store/admin/themes/themes.api';
+import { closeDeleteModal, resetDeleteModal } from '@/store/admin/countries/slices/deleteConfirmModal';
+import { closeUpdateTheme } from '@/store/admin/themes/slices/updateThemeModalSlice';
+
+const Themes = () => {
+
+    // PREPARE
+    const { data } = useGetAllThemesQuery();
+    const dispatch = useAppDispatch();
+
+    // THEME
+    // create
+    const [ createTheme ] = useCreateThemeMutation();
     const [themeValue, setThemeValue] = useState('');
     const [pathValue, setPathValue] = useState('');
-
-    const dispatch = useAppDispatch();
-    const {themeToDelete, themeToUpdate} = useAppSelector(state => state.themesPageSlice);
-    const { isOpen: isDeleteModalOpen, isDeleteSelected } = useAppSelector(state => state.deleteModalSlice);
-    const { isOpen } = useAppSelector(state => state.updateThemeModalSlice)
-
-
-    useEffect(() => {
-        dispatch(closeDeleteModal());
-        if (!themeToDelete?.id) return;
-        if (!isDeleteSelected) return;
-        deleteTheme(themeToDelete.id);
-        dispatch(resetDeleteModal());
-    }, [isDeleteSelected])
 
     const [form] = Form.useForm();
 
@@ -61,6 +65,22 @@ const Themes = () => {
             alert('Не удалось добавить тему')
         }
     }
+    
+    // delete/update
+    const [ deleteTheme ] = useDeleteThemeMutation();
+    const [ updateTheme ] = useChangeThemeMutation();
+
+    const {themeToDelete, themeToUpdate} = useAppSelector(state => state.themesPageSlice);
+    const { isOpen: isDeleteModalOpen, isDeleteSelected } = useAppSelector(state => state.deleteModalSlice);
+    const { isOpen } = useAppSelector(state => state.updateThemeModalSlice)
+
+    useEffect(() => {
+        dispatch(closeDeleteModal());
+        if (!themeToDelete?.id) return;
+        if (!isDeleteSelected) return;
+        deleteTheme(themeToDelete.id);
+        dispatch(resetDeleteModal());
+    }, [isDeleteSelected])
 
     useEffect(() => {
         dispatch(closeUpdateTheme());
@@ -68,13 +88,14 @@ const Themes = () => {
         updateTheme(themeToUpdate);
     }, [themeToUpdate])
 
+    //  design
     const [hamburgerOpened, setHamburgerOpened] = useState(false)
     const hamburgerHandle = () => {
       if (window.innerWidth < 768) setHamburgerOpened(!hamburgerOpened);
     }
 
     return (
-        <div>
+        <>
             { isDeleteModalOpen && (<DeleteConfirmModal message="Удалить тему?"/>) }
             { isOpen && <UpdateThemeModal/> }
             <div onClick={hamburgerHandle} className={classes.hamburger__container}>
@@ -127,7 +148,7 @@ const Themes = () => {
                     ) : null
                 }
             </div>
-        </div>
+        </>
     )
 }
 
