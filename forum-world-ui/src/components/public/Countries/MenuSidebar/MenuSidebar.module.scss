@@ -1,4 +1,4 @@
-@import "../../../styles/vars.scss";
+@import "../../../../styles/vars.scss";
 $countItems: 4;
 
 .container {
@@ -34,7 +34,7 @@ $countItems: 4;
 .top {
     @media ($tablet) {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         padding: 0.5rem;
         align-items: center;
         border-bottom: 1px solid $bgTableLigthGrey;

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-import Link from "next/link";
 import { GetServerSideProps } from "next";
 
 // css
@@ -9,7 +8,7 @@ import classes from './countryPathFragment.module.scss';
 
 import { ICountryPageData } from "@/models/pages/ICountryPageData";
 import ContentBlock from "@/components/_shared/ContentBlock/ContentBlock";
-import MenuSidebar from "@/components/public/MenuSidebar/MenuSidebar";
+import MenuSidebar from "@/components/public/Countries/MenuSidebar/MenuSidebar";
 
 export default function CountryPage({ posts, themes, content, pathFragment, isError }: ICountryPageData) {
     
