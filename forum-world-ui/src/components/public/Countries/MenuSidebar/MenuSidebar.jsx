@@ -19,7 +19,7 @@ const MenuSidebar = ({items, countryPathFragment, open}) => {
             <Link className={classes.return} href={'/countries/'}>
                 <ArrowLeftOutlined />
             </Link>
-            <h1 className={classes.mainTitle}>Название страны</h1>
+            <h1 className={classes.mainTitle}>Forum World</h1>
           </div>
           <h2 className={classes.itemTitle}>Супер-посты</h2>
 
