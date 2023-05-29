@@ -17,59 +17,64 @@ export class CoreApiService implements OnApplicationBootstrap {
       this.apiOrigin = await this.configService.get('api-path.origin');
     }
 
-        get<T>(url: string = '', config?): Observable<AxiosResponse<T>> {
-          const path = `${this.apiOrigin}${this.pathFragment}${url}`;
-          return this.httpService.get<T>(path, config).pipe(
-            catchError((error: AxiosError) => {
-                console.log(`get method to ${path} was throw error:\r${error}`)
-                return new Observable<AxiosResponse<T>>()
-              }),
-          );
-        }
-      
-        post<T>(data?, config?): Observable<AxiosResponse<T>>;      
-        post<T>(url: string, data?, config?): Observable<AxiosResponse<T>> {
-          if (typeof url !== 'string') {
-            config = data;
-            data = url;
-            url = ''
-          }
+    get<T>(url?: string | any, config?: any): Observable<AxiosResponse<T>> {
+      if (typeof url !== 'string') {
+        config = url,
+        url = ''
+      }
 
-          const path = `${this.apiOrigin}${this.pathFragment}${url}`;
-          return this.httpService.post<T>(`${path}`, data, config).pipe(
-            catchError((error: AxiosError) => {
-                console.log(`post method to ${path} was throw error:\r${error}`)
-                return new Observable<AxiosResponse<T>>()
-              }),
-            );
-        }
+      const path = `${this.apiOrigin}${this.pathFragment}${url}`;
+      return this.httpService.get<T>(path, config).pipe(
+        catchError((error: AxiosError) => {
+            console.log(`get method to ${path} was throw error:\r${error}`)
+            return new Observable<AxiosResponse<T>>()
+          }),
+      );
+    }
       
-        put<T>(data?, config?): Observable<AxiosResponse<T>>;
-        put<T>(url?: string, data?, config?): Observable<AxiosResponse<T>> {
-          if (typeof url !== 'string') {
-            config = data;
-            data = url;
-            url = ''
-          }
+    post<T>(data?, config?): Observable<AxiosResponse<T>>;      
+    post<T>(url: string, data?, config?): Observable<AxiosResponse<T>> {
+      if (typeof url !== 'string') {
+        config = data;
+        data = url;
+        url = ''
+      }
 
-          const path = `${this.apiOrigin}${this.pathFragment}${url}`;
-          return this.httpService.put<T>(`${path}`, data, config).pipe(
-            catchError((error: AxiosError) => {
-                console.log(`put method to ${path} was throw error:\r${error}`)
-                return new Observable<AxiosResponse<T>>()
-              }),
-            );
-        }
-      
-        delete<T>(url: string = '', config?): Observable<AxiosResponse<T>> {
-          const path = `${this.apiOrigin}${this.pathFragment}${url}`;
-          return this.httpService.delete<T>(`${path}`, config).pipe(
-            catchError((error: AxiosError) => {
-                console.log(`delete method to ${path} was throw error:\r${error}`)
-                return new Observable<AxiosResponse<T>>()
-              }),
-            );
-        }}
+      const path = `${this.apiOrigin}${this.pathFragment}${url}`;
+      return this.httpService.post<T>(`${path}`, data, config).pipe(
+        catchError((error: AxiosError) => {
+            console.log(`post method to ${path} was throw error:\r${error}`)
+            return new Observable<AxiosResponse<T>>()
+          }),
+        );
+    }
+  
+    put<T>(data?, config?): Observable<AxiosResponse<T>>;
+    put<T>(url?: string, data?, config?): Observable<AxiosResponse<T>> {
+      if (typeof url !== 'string') {
+        config = data;
+        data = url;
+        url = ''
+      }
+
+      const path = `${this.apiOrigin}${this.pathFragment}${url}`;
+      return this.httpService.put<T>(`${path}`, data, config).pipe(
+        catchError((error: AxiosError) => {
+            console.log(`put method to ${path} was throw error:\r${error}`)
+            return new Observable<AxiosResponse<T>>()
+          }),
+        );
+    }
+  
+    delete<T>(url: string = '', config?): Observable<AxiosResponse<T>> {
+      const path = `${this.apiOrigin}${this.pathFragment}${url}`;
+      return this.httpService.delete<T>(`${path}`, config).pipe(
+        catchError((error: AxiosError) => {
+            console.log(`delete method to ${path} was throw error:\r${error}`)
+            return new Observable<AxiosResponse<T>>()
+          }),
+        );
+    }}
 
 @Injectable()
 export class CoreApiServiceFactory {
