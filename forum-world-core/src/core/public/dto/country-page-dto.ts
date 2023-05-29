@@ -1,5 +1,5 @@
-import { ThemeDto } from "./theme-dto"
-import { PostNameDto } from "./post-name-dto"
+import { ThemeDto } from "../themes/dto/theme-dto"
+import { PostNameDto } from "../posts/dto/post-name-dto"
 
 export class CountryPageDto {
     posts: PostNameDto[]

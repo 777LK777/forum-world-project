@@ -1,6 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CountriesService } from './countries.service';
 import { CountryDto } from './dto/country-dto';
+import { CountryIdDto } from './dto/country-id-dto';
 
 @Controller('api/public/countries')
 export class CountriesController {
@@ -9,5 +10,10 @@ export class CountriesController {
     @Get()
     async getCountries(): Promise<CountryDto[]> {
         return await this.service.getCountries();
+    }
+
+    @Get('/:countryPathFragment')
+    async getCountryId(@Param('countryPathFragment') countryPathFragment: string): Promise<CountryIdDto> {
+        return await this.service.getCountry(countryPathFragment);
     }
 }

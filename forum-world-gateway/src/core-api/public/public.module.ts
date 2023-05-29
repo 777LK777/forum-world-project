@@ -1,13 +1,19 @@
 import { Module } from '@nestjs/common';
 import { PublicController } from './public.controller';
 import { PublicService } from './public.service';
-import { CoreApiModule } from '../_shared/core-api-module/core-api.module';
 import { PagesModule } from './pages/pages.module';
 import { ContentsModule } from './contents/contents.module';
 import { CountriesModule } from './countries/countries.module';
+import { PostsModule } from './posts/posts.module';
+import { ThemesModule } from './themes/themes.module';
 
 @Module({
-  imports: [CoreApiModule.forFeature('/public'), PagesModule, ContentsModule, CountriesModule],
+  imports: [
+    PagesModule,
+    CountriesModule,
+    ThemesModule,
+    PostsModule,
+    ContentsModule],
   controllers: [PublicController],
   providers: [PublicService]
 })

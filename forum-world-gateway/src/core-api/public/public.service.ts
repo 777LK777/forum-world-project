@@ -1,20 +1,21 @@
-import { firstValueFrom } from 'rxjs';
 import { Injectable } from '@nestjs/common';
 
 import { HomePageDto } from './dto/homePage-dto';
-import { PagesService } from './pages/pages.service';
 import { CountryPageDto } from './dto/countryPage-dto';
-import { CoreApiService } from '../_shared/core-api-module/core-api.service';
+import { PagesService } from './pages/pages.service';
 import { ContentsService } from './contents/contents.service';
 import { CountriesService } from './countries/countries.service';
+import { PostsService } from './posts/posts.service'
+import { ThemesService } from './themes/themes.service';
 
 @Injectable()
 export class PublicService {
     
     constructor(
-        private readonly api: CoreApiService,
-        private readonly countriesService: CountriesService,
         private readonly pagesService: PagesService,
+        private readonly countriesService: CountriesService,
+        private readonly themesService: ThemesService,
+        private readonly postsService: PostsService,
         private readonly contentsService: ContentsService) { }
     
     async getHomePageData(): Promise<HomePageDto> {
@@ -29,7 +30,17 @@ export class PublicService {
     }
 
     async getCountryPageDto(countryPathFragment: string): Promise<CountryPageDto> {
-        const { data } = await firstValueFrom(this.api.get<CountryPageDto>(`/countries/${countryPathFragment}`))
-        return data;
+        const basicPages = await this.pagesService.getBasicPages();
+
+        const countryContentData = await this.countriesService.getCountryContentData(countryPathFragment);
+        const posts = await this.postsService.getSuperPosts(countryContentData.id);
+
+        const content = countryContentData.contentId ? await this.contentsService.getContent(countryContentData.contentId) : { data: {}};
+        
+        const themeIds = await this.postsService.getPostThemeIds(countryContentData.id);
+
+        const themes = themeIds.length > 0 ? await this.themesService.getThemes(themeIds) : [];
+
+        return { posts: posts, themes: themes, content: content, basicPages: basicPages }
     }
 }

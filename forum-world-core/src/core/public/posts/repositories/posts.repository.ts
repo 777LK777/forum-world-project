@@ -1,13 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/database/prisma.service";
-import { PostNameDto } from "../../dto/post-name-dto";
+import { PostNameDto } from "../dto/post-name-dto";
 
 @Injectable()
 export class PostsRepository {
     
     constructor(private readonly prismaService: PrismaService) { }
 
-    async getSuperPosts(countryPathFragment: string): Promise<PostNameDto[]> {
+    async getSuperPosts(countryId: number): Promise<PostNameDto[]> {
         const res = await this.prismaService.post.findMany({
             select: {
                 postId: true,
@@ -17,9 +17,7 @@ export class PostsRepository {
                 AND: [
                     {
                         country: {
-                            pathFragment: {
-                                equals: countryPathFragment
-                            }
+                            countryId: +countryId
                         }
                     },
                     {
@@ -32,5 +30,22 @@ export class PostsRepository {
         })
 
         return res.map(p => { return {id: p.postId, name: p.name}})
+    }
+
+    async getThemeIdsByCountryId(countryId: number): Promise<number[]> {
+        const res = await this.prismaService.post.findMany({
+            select: {
+                themeId: true
+            },
+            where: {
+                AND: {
+                    countryId: +countryId,
+                    themeId: { not: null }
+                }
+            },
+            distinct: ['themeId']
+        })
+
+        return res.map(id => id.themeId);
     }
 }
