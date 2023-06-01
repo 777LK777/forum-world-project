@@ -101,6 +101,43 @@ $countItems: 4;
 }
 
 .listVisible {
-    max-height: calc(100% - $countItems * 34px - 58px);
+    //max-height: calc(100% - $countItems * 34px - 58px);
+    max-height: 300px;
     overflow-y: auto;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    align-items: start;
+    font-size: 1.6rem;
+    text-decoration: underline;
+    width: 100%;
+    &__item {
+        width: 100%;
+        margin-top: .4rem;
+        border-radius: .5rem;
+        transition: background-color .3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+            background-color: $bgTableLigthGrey;
+        }
+        &:active {
+            color: rgb(96, 96, 255);
+            background-color: rgba(173, 216, 230, 0.2);
+        }
+        @media ($tablet) {
+            padding: 0 1rem;
+        }
+    }
+
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    height: calc(100% - 62px);
 }

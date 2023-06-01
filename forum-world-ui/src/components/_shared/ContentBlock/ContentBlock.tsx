@@ -12,7 +12,7 @@ interface IContentBlockProps {
 
 const ContentBlock: React.FC<IContentBlockProps> = ({ data }) => {
 
-    if (data?.blocks === undefined) return (<h1>DEFAULT CONTENT</h1>)
+    if (data?.blocks === undefined) return (<h1>Страница на этапе модерации...</h1>)
 
     function customParser(block: any) {
         return '<hr />';

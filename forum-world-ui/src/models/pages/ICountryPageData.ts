@@ -1,6 +1,7 @@
 import { IPost } from "./IPost";
 import { ITheme } from "./ITheme";
 import { IContent } from "../IContent";
+import { IBasicPage } from "./IBasicPage";
 
 export interface ICountryPageData {
     posts: IPost[]
@@ -8,4 +9,5 @@ export interface ICountryPageData {
     content: IContent
     pathFragment: string
     isError: boolean
+    basicPages: IBasicPage[]
 }

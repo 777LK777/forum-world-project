@@ -10,7 +10,7 @@ import { ICountryPageData } from "@/models/pages/ICountryPageData";
 import ContentBlock from "@/components/_shared/ContentBlock/ContentBlock";
 import MenuSidebar from "@/components/public/Countries/MenuSidebar/MenuSidebar";
 
-export default function CountryPage({ posts, themes, content, pathFragment, isError }: ICountryPageData) {
+export default function CountryPage({ posts, themes, content, pathFragment, isError, basicPages }: ICountryPageData) {
     
     const [menuActive, setMenuActive] = useState(false)
     const hamburgerHandle = () => {
@@ -38,9 +38,11 @@ export default function CountryPage({ posts, themes, content, pathFragment, isEr
             </div>
             <main className={classes.wrapper}>
                 <MenuSidebar 
-                    items={themes} 
+                    themes={themes} 
                     countryPathFragment={pathFragment}
                     open={menuActive}
+                    basicPages={basicPages}
+                    posts={posts}
                 />
                 <div className={classes.contentContainer}>
                     <ContentBlock data={content?.data} />
@@ -59,6 +61,8 @@ export const getServerSideProps: GetServerSideProps<ICountryPageData | any> =
     try {
         const response = await axios.get<ICountryPageData>(`${process.env.NEXT_PUBLIC_HOST}/api/public/countries/${query.countryPathFragment}`);
         result = response.data;
+        console.log('-------')
+        console.log(result)
     } catch(err) {
         isError = err !== undefined
     }
@@ -69,6 +73,7 @@ export const getServerSideProps: GetServerSideProps<ICountryPageData | any> =
             themes: result?.themes ?? null,
             content: result?.content ?? null,
             pathFragment: query.countryPathFragment ?? null,
+            basicPages: result?.basicPages ?? null,
             isError: isError ?? null,
         }
     })
