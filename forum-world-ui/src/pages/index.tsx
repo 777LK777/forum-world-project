@@ -56,7 +56,6 @@ export const getServerSideProps: GetServerSideProps<IHomePageData | any> =
     try {
       const response = await axios.get<IHomePageData>(`${process.env.NEXT_PUBLIC_HOST}/api/public`);
       result = response.data;
-      console.log(result)
     } catch(error) {
       isError = error !== undefined
     }

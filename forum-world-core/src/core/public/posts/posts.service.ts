@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PostNameDto } from './dto/post-name-dto';
 import { PostsRepository } from './repositories/posts.repository';
+import { PostContentLinkDto } from './dto/post-content-link-dto';
 
 @Injectable()
 export class PostsService {
@@ -12,5 +13,9 @@ export class PostsService {
 
     async getThemeIdsByCountryId(countryId: number): Promise<number[]> {
         return await this.postsRepository.getThemeIdsByCountryId(countryId);
+    }
+
+    async getSuperPostContentLink(countryId: number, postId: number): Promise<PostContentLinkDto> {
+        return await this.postsRepository.getSuperPostContentLink(countryId, postId);
     }
 }

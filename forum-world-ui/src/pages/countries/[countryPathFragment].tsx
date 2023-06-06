@@ -61,8 +61,6 @@ export const getServerSideProps: GetServerSideProps<ICountryPageData | any> =
     try {
         const response = await axios.get<ICountryPageData>(`${process.env.NEXT_PUBLIC_HOST}/api/public/countries/${query.countryPathFragment}`);
         result = response.data;
-        console.log('-------')
-        console.log(result)
     } catch(err) {
         isError = err !== undefined
     }

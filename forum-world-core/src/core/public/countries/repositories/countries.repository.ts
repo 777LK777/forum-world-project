@@ -2,7 +2,8 @@ import { Injectable } from "@nestjs/common";
 
 import { PrismaService } from "src/database/prisma.service";
 import { CountryDto as Country } from "../dto/country-dto";
-import { CountryIdDto } from "../dto/country-id-dto";
+import { CountryContentLinkDto } from "../dto/country-content-link-dto";
+import { CountryNameDto } from "../dto/country-name-dto";
 
 @Injectable()
 export class CountriesRepository {
@@ -21,7 +22,7 @@ export class CountriesRepository {
         return await res.map(c => new Country(c.name, c.pathFragment, c.flagImageUrl))
     }
 
-    async getCountry(countryPathFragment: string): Promise<CountryIdDto> {
+    async getCountryContentLink(countryPathFragment: string): Promise<CountryContentLinkDto> {
         const res = await this.prismaService.country.findFirst({
             select: {
                 countryId: true,
@@ -31,6 +32,19 @@ export class CountriesRepository {
             where: { pathFragment: countryPathFragment }
         })
 
-        return new CountryIdDto(res.countryId, res.name, res.contentId);
+        return new CountryContentLinkDto(res.countryId, res.name, res.contentId);
+    }
+
+    async getCountryName(countryPathFragment: string): Promise<CountryNameDto> {
+        const res = await this.prismaService.country.findFirst({
+            select: {
+                countryId: true,
+                name: true,
+                pathFragment: true
+            },
+            where: { pathFragment: countryPathFragment }
+        })
+
+        return new CountryNameDto(res.countryId, res.name, res.pathFragment);
     }
 }
