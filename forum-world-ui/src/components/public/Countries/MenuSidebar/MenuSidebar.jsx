@@ -32,7 +32,7 @@ const MenuSidebar = ({themes, countryPathFragment, open, basicPages, posts}) => 
                 <h2 onClick={postsTitleClickHandler} className={classes.itemTitle}>Супер-посты</h2>
                 <ul className={`${classes.list} ${visiblePosts ? classes.listVisible : ''}`}>
                     {posts?.map(item => 
-                        <Link href={`/posts/${item.id}`}>
+                        <Link href={`/countries/${countryPathFragment}/posts/${item.id}`}>
                             <li 
                                 key={item.pathFragment} 
                                 className={classes.list__item}

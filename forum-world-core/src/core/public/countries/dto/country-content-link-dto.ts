@@ -1,4 +1,4 @@
-export class CountryIdDto {
+export class CountryContentLinkDto {
     constructor(
         readonly id: number,
         readonly name: string,

@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/database/prisma.service";
 import { PostNameDto } from "../dto/post-name-dto";
+import { PostContentLinkDto } from "../dto/post-content-link-dto";
 
 @Injectable()
 export class PostsRepository {
@@ -47,5 +48,23 @@ export class PostsRepository {
         })
 
         return res.map(id => id.themeId);
+    }
+
+    async getSuperPostContentLink(countryId: number, postId: number): Promise<PostContentLinkDto> {
+        const res = await this.prismaService.post.findFirst({
+            select: {
+                postId: true,
+                contentId: true
+            },
+            where: {
+                AND: {
+                    countryId: +countryId,
+                    postId: +postId,
+                    themeId: null
+                }
+            }
+        })
+
+        return new PostContentLinkDto(res.postId, res.contentId);
     }
 }
