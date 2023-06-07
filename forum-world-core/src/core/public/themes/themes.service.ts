@@ -10,4 +10,8 @@ export class ThemesService {
     async getThemes(themeIds: number[]): Promise<ThemeDto[]> {
         return await this.themesRepository.getThemes(themeIds);
     }
+
+    async getTheme(themePathFragment: string): Promise<ThemeDto> {
+        return await this.themesRepository.getTheme(themePathFragment);
+    }
 }

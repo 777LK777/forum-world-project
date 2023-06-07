@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, Param } from '@nestjs/common';
 import { ThemesService } from './themes.service';
 import { ThemeDto } from './dto/theme-dto';
 
@@ -9,5 +9,10 @@ export class ThemesController {
     @Get()
     async getThemes(@Query('themeIds') themeIds: number[]): Promise<ThemeDto[]> {
         return await this.themesService.getThemes(themeIds);
+    }
+
+    @Get('/:themePathFragment')
+    async getTheme(@Param('themePathFragment') themePathFragment: string): Promise<ThemeDto> {
+        return await this.themesService.getTheme(themePathFragment);
     }
 }

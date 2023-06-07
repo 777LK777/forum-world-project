@@ -24,4 +24,9 @@ export class PostsService {
         const { data } = await firstValueFrom(this.api.get<PostContentLinkDto>('/super/content', { params: { countryId: countryId, postId: postId }}));
         return data;
     }
+
+    async getPosts(countryId: number, themeId: number): Promise<PostNameDto[]> {
+        const { data } = await firstValueFrom(this.api.get<PostNameDto[]>({params: { countryId: countryId, themeId: themeId }}))
+        return data;
+    }
 }
