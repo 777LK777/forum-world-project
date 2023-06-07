@@ -1,13 +1,13 @@
-import { ContentDto } from "../contents/dto/content-dto";
-import { CountryNameDto } from "../countries/dto/externals/country-name-dto";
+import { CountryNameDto } from "../countries/dto/country-name-dto";
 import { BasicPageDto } from "../pages/dto/basic-page-dto";
 import { PostNameDto } from "../posts/dto/post-name-dto";
 import { ThemeDto } from "../themes/dto/theme-dto";
 
-export class SuperPostPageDto {
+export class ThemePageDto {
+    theme: ThemeDto
     country: CountryNameDto
-    content: ContentDto
-    posts: PostNameDto[]
     basicPages: BasicPageDto[]
+    superPosts: PostNameDto[]
+    posts: PostNameDto[]
     themes: ThemeDto[]
 }

@@ -3,8 +3,8 @@ import { firstValueFrom } from 'rxjs';
 
 import { CountryDto as Country } from './dto/country-dto';
 import { CoreApiService } from 'src/core-api/_shared/core-api-module/core-api.service';
-import { CountryContentDto } from './dto/country-content-dto';
-import { CountryNameDto } from './dto/country-name-dto';
+import { CountryContentDto } from './dto/internals/country-content-dto';
+import { CountryNameDto } from './dto/internals/country-name-dto';
 
 @Injectable()
 export class CountriesService {

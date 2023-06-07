@@ -1,5 +1,5 @@
 export class ThemeDto {
-    id?: number
+    id: number
     name: string
     pathFragment: string
 }

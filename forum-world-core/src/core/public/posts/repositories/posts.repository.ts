@@ -67,4 +67,29 @@ export class PostsRepository {
 
         return new PostContentLinkDto(res.postId, res.contentId);
     }
+
+    async getPosts(countryId: number, themeId: number): Promise<PostNameDto[]> {
+        const res = await this.prismaService.post.findMany({
+            select: {
+                postId: true,
+                name: true
+            },
+            where: {
+                AND: [
+                    {
+                        country: {
+                            countryId: +countryId
+                        }
+                    },
+                    {
+                        themeId: {
+                            equals: +themeId
+                        }
+                    }
+                ]
+            }
+        })
+
+        return res.map(p => { return {id: p.postId, name: p.name}})
+    }
 }

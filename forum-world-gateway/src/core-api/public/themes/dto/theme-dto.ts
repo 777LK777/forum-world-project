@@ -1,4 +1,5 @@
 export class ThemeDto {
-    name: string
-    pathFragment: string
+    constructor(
+        readonly name: string,
+        readonly pathFragment: string) {}
 }

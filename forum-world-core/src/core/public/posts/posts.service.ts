@@ -18,4 +18,8 @@ export class PostsService {
     async getSuperPostContentLink(countryId: number, postId: number): Promise<PostContentLinkDto> {
         return await this.postsRepository.getSuperPostContentLink(countryId, postId);
     }
+
+    async getPosts(countryId: number, themeId: number): Promise<PostNameDto[]> {
+        return await this.postsRepository.getPosts(countryId, themeId);
+    }
 }

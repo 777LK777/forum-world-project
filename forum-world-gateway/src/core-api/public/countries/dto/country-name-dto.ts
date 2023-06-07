@@ -1,5 +1,5 @@
 export class CountryNameDto {
-    id: number
-    name: string
-    pathFragment: string
+    constructor(
+        readonly name: string, 
+        readonly pathFragment: string) {}
 }

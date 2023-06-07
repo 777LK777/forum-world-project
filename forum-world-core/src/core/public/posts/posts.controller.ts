@@ -22,4 +22,9 @@ export class PostsController {
     async getThemeIdsByCountryId(@Query('countryId') countryId: number): Promise<number[]> {
         return await this.postsService.getThemeIdsByCountryId(countryId);
     }
+
+    @Get()
+    async getPosts(@Query('countryId') countryId: number, @Query('themeId') themeId: number): Promise<PostNameDto[]> {
+        return await this.postsService.getPosts(countryId, themeId);
+    }
 }

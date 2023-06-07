@@ -2,7 +2,8 @@ import { Controller, Get, Param, Query } from '@nestjs/common';
 import { PublicService } from './public.service';
 import { HomePageDto } from './dto/homePage-dto';
 import { CountryPageDto } from './dto/countryPage-dto';
-import { SuperPostPageDto } from './dto/superPostPageDto-dto';
+import { SuperPostPageDto } from './dto/superPostPage-dto';
+import { ThemePageDto } from './dto/themePage-dto';
 
 @Controller('api/public')
 export class PublicController {
@@ -22,5 +23,12 @@ export class PublicController {
     @Get('/posts/super')
     async getSuperPostPageData(@Query('countryPathFragment') countryPathFragment: string, @Query('postId') postId: number): Promise<SuperPostPageDto> {
         return await this.service.getSuperPostPageDto(countryPathFragment, postId);
+    }
+
+    @Get('/theme')
+    async getThemePageData(
+        @Query('countryPathFragment') countryPathFragment: string,
+        @Query('themePathFragment') themePathFragment: string): Promise<ThemePageDto> {
+        return await this.service.getThemePageDto(countryPathFragment, themePathFragment);
     }
 }

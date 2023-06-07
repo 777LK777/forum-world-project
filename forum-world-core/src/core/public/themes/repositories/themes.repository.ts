@@ -21,6 +21,21 @@ export class ThemesRepository {
             }
         })
         
-        return res.map(t => { return {name: t.name, pathFragment: t.pathFragment}})
+        return res.map(t => { return { name: t.name, pathFragment: t.pathFragment}})
+    }
+
+    async getTheme(themePathFragment: string): Promise<ThemeDto> {
+        const res = await this.prismaService.theme.findFirst({
+            select: {
+                themeId: true,
+                name: true,
+                pathFragment: true
+            },
+            where: {
+                pathFragment: themePathFragment
+            }
+        })
+
+        return { id: res.themeId, name: res.name, pathFragment: res.pathFragment };
     }
 }
