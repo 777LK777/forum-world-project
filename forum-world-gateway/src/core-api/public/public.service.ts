@@ -11,6 +11,7 @@ import { SuperPostPageDto } from './dto/superPostPage-dto';
 import { CountryNameDto } from './countries/dto/country-name-dto';
 import { ThemePageDto } from './dto/themePage-dto';
 import { ThemeDto } from './themes/dto/theme-dto';
+import { PostPageDto } from './dto/postPage-dto';
 
 @Injectable()
 export class PublicService {
@@ -94,5 +95,26 @@ export class PublicService {
             superPosts: superPosts,
             posts: posts,
             themes: themes };
+    }
+
+    async getPostPageData(countryPathFragment, themePathFragment, postId): Promise<PostPageDto> {
+        const country = await this.countriesService.getCountryName(countryPathFragment);
+
+        const theme = await this.themesService.getTheme(themePathFragment);
+
+        const postContentLink = await this.postsService.getPostContentLink(country.id, theme.id, postId);
+
+        const content = postContentLink.contentId ? await this.contentsService.getContent(postContentLink.contentId) : { data: {}};
+        
+        const basicPages = await this.pagesService.getBasicPages();        
+
+        const themeIds = await this.postsService.getPostThemeIds(country.id);
+
+        const themes = themeIds.length > 0 ? await this.themesService.getThemes(themeIds) : [];        
+        
+        return {
+            country: new CountryNameDto(country.name, country.pathFragment),
+            theme: new ThemeDto(theme.name, theme.pathFragment),
+            postId: postId, content: content, basicPages: basicPages, themes: themes };
     }
 }

@@ -4,6 +4,7 @@ import { HomePageDto } from './dto/homePage-dto';
 import { CountryPageDto } from './dto/countryPage-dto';
 import { SuperPostPageDto } from './dto/superPostPage-dto';
 import { ThemePageDto } from './dto/themePage-dto';
+import { PostPageDto } from './dto/postPage-dto';
 
 @Controller('api/public')
 export class PublicController {
@@ -30,5 +31,14 @@ export class PublicController {
         @Query('countryPathFragment') countryPathFragment: string,
         @Query('themePathFragment') themePathFragment: string): Promise<ThemePageDto> {
         return await this.service.getThemePageDto(countryPathFragment, themePathFragment);
+    }
+
+    @Get('/posts/:postId')
+    async getPostPageData(
+        @Query('countryPathFragment') countryPathFragment: string,
+        @Query('themePathFragment') themePathFragment: string,
+        @Param('postId') postId: number,
+    ): Promise<PostPageDto> {
+        return await this.service.getPostPageData(countryPathFragment, themePathFragment, postId);
     }
 }
