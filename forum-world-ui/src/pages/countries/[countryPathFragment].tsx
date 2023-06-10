@@ -14,7 +14,7 @@ export default function CountryPage({ posts, themes, content, pathFragment, isEr
     
     const [menuActive, setMenuActive] = useState(false)
     const hamburgerHandle = () => {
-        if (window.innerWidth < 768) setMenuActive(!menuActive)
+			if (window.innerWidth < 768) setMenuActive(!menuActive)
     }
     return (
         <div>
