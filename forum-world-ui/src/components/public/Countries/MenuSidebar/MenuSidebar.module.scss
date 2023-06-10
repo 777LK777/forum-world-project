@@ -44,6 +44,7 @@ $countItems: 4;
 .return {
     display: none;
     @media ($tablet) {
+			cursor: pointer;
       display: block;
       font-size: 4rem;
       margin-right: .5rem;

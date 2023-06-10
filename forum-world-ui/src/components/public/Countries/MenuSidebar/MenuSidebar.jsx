@@ -2,6 +2,7 @@ import Link from "next/link";
 import classes from "./MenuSidebar.module.scss";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useState } from 'react';
+import { useRouter } from "next/router";
 
 const MenuSidebar = ({themes, countryPathFragment, open, basicPages, posts}) => {
     
@@ -17,13 +18,18 @@ const MenuSidebar = ({themes, countryPathFragment, open, basicPages, posts}) => 
     const postsTitleClickHandler = () => {
         setVisiblePosts(!visiblePosts);
     }
+
+		const router = useRouter();
+		const handleGoBack = () => {
+			router.back();
+		};
     
     return (
         <aside className={containerClass}>
           <div className={classes.top}>
-            <Link className={classes.return} href={'/countries/'}>
+            <div className={classes.return} onClick={handleGoBack}>
                 <ArrowLeftOutlined />
-            </Link>
+            </div>
             <h1 className={classes.mainTitle}>Forum World</h1>
           </div>
 
