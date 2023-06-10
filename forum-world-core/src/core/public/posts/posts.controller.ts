@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, Param } from '@nestjs/common';
 
 import { PostsService } from './posts.service';
 import { PostNameDto } from './dto/post-name-dto';
@@ -27,4 +27,13 @@ export class PostsController {
     async getPosts(@Query('countryId') countryId: number, @Query('themeId') themeId: number): Promise<PostNameDto[]> {
         return await this.postsService.getPosts(countryId, themeId);
     }
+
+    @Get('/:postId/content')
+    async getPostContentLink(
+        @Query('countryId') countryId: number,
+        @Query('themeId') themeId: number,
+        @Param('postId') postId: number): Promise<PostContentLinkDto> {
+        return await this.postsService.getPostContentLink(countryId, themeId, postId);
+    }
+
 }

@@ -92,4 +92,22 @@ export class PostsRepository {
 
         return res.map(p => { return {id: p.postId, name: p.name}})
     }
+
+    async getPostContentLink(countryId: number, themeId: number, postId: number): Promise<PostContentLinkDto> {
+        const res = await this.prismaService.post.findFirst({
+            select: {
+                postId: true,
+                contentId: true
+            },
+            where: {
+                AND: {
+                    countryId: +countryId,
+                    postId: +postId,
+                    themeId: +themeId
+                }
+            }
+        })
+
+        return new PostContentLinkDto(res.postId, res.contentId);
+    }
 }

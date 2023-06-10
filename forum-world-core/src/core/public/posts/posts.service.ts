@@ -22,4 +22,8 @@ export class PostsService {
     async getPosts(countryId: number, themeId: number): Promise<PostNameDto[]> {
         return await this.postsRepository.getPosts(countryId, themeId);
     }
+
+    async getPostContentLink(countryId: number, themeId: number, postId: number): Promise<PostContentLinkDto> {
+        return await this.postsRepository.getPostContentLink(countryId, themeId, postId);
+    }
 }
