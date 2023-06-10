@@ -11,12 +11,6 @@ export default function ThemePage({theme, country, basicPages, superPosts, posts
 	const hamburgerHandle = () => {
 		if (window.innerWidth < 768) setMenuActive(!menuActive)
 	}
-	// console.log(theme)
-	// console.log(country)
-	// console.log(basicPages)
-	// console.log(superPosts)
-	console.log(posts[0])
-	// console.log(themes)
 	return (
 	<div>
 		{isError && <h2>Something went wrong...</h2>}
