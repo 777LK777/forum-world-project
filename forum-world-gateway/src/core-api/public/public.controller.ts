@@ -5,6 +5,7 @@ import { CountryPageDto } from './dto/countryPage-dto';
 import { SuperPostPageDto } from './dto/superPostPage-dto';
 import { ThemePageDto } from './dto/themePage-dto';
 import { PostPageDto } from './dto/postPage-dto';
+import { BasicPageDto } from './dto/basicPage-dto';
 
 @Controller('api/public')
 export class PublicController {
@@ -40,5 +41,10 @@ export class PublicController {
         @Param('postId') postId: number,
     ): Promise<PostPageDto> {
         return await this.service.getPostPageData(countryPathFragment, themePathFragment, postId);
+    }
+
+    @Get('/basicPages/:basicPagePathFragment')
+    async getBasicPageData(@Param('basicPagePathFragment') basicPagePathFragment: string): Promise<BasicPageDto> {
+        return await this.service.getBasicPageData(basicPagePathFragment);
     }
 }

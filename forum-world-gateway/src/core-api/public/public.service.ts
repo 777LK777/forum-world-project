@@ -12,6 +12,7 @@ import { CountryNameDto } from './countries/dto/country-name-dto';
 import { ThemePageDto } from './dto/themePage-dto';
 import { ThemeDto } from './themes/dto/theme-dto';
 import { PostPageDto } from './dto/postPage-dto';
+import { BasicPageDto } from './dto/basicPage-dto';
 
 @Injectable()
 export class PublicService {
@@ -116,5 +117,15 @@ export class PublicService {
             country: new CountryNameDto(country.name, country.pathFragment),
             theme: new ThemeDto(theme.name, theme.pathFragment),
             postId: postId, content: content, basicPages: basicPages, themes: themes };
+    }
+    
+    async getBasicPageData(basicPagePathFragment: string) : Promise<BasicPageDto> {
+        const pageContentLink = await this.pagesService.getBasicPageContentLink(basicPagePathFragment);
+
+        const content = pageContentLink.contentId ? await this.contentsService.getContent(pageContentLink.contentId) : { data: {}};
+
+        const basicPages = await this.pagesService.getBasicPages();
+
+        return { basicPages: basicPages, content: content };
     }
 }

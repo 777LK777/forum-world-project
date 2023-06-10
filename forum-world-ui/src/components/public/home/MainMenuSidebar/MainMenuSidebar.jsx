@@ -29,7 +29,7 @@ const MainMenuSidebar = ({items, open, basicPages}) => {
                 </ul>
                 <div className={classes.links}>
                     {basicPages.map(page => (
-                        <Link href={`/${basicPages.pathFragment}`} key={basicPages.pathFragment} className={classes.links__item}>
+                        <Link href={`/${page.pathFragment}`} key={page.pathFragment} className={classes.links__item}>
                             {page.name}
                         </Link>
                         

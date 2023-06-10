@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { PagesRepository } from './repositories/pages.repository';
+
 import { HomePageDto } from './dto/home-page-dto';
 import { BasicPageDto } from './dto/basic-page-dto';
+import { PageContentLinkDto } from './dto/page-content-link-dto';
+import { PagesRepository } from './repositories/pages.repository';
 
 @Injectable()
 export class PagesService {
@@ -13,5 +15,9 @@ export class PagesService {
 
     async getBasicPages(): Promise<BasicPageDto[]> {
         return await this.repository.getBasicPages();
+    }
+
+    async getBasicPageContentLink(basicPagePathFragment: string): Promise<PageContentLinkDto> {
+        return await this.repository.getBasicPageContentLink(basicPagePathFragment);
     }
 }
