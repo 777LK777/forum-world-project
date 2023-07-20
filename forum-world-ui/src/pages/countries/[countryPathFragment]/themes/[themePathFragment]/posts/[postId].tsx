@@ -13,10 +13,8 @@ export const getServerSideProps: GetServerSideProps<IPostPageData | any> =
         let isError: boolean = false;
     
         try {
-            const response = await axios.get<IPostPageData>(`${process.env.NEXT_PUBLIC_HOST}/api/public/posts/${context?.query?.postId}`, { params: { countryPathFragment: context?.query?.countryPathFragment, themePathFragment: context?.query?.themePathFragment }});
+            const response = await axios.get<IPostPageData>(`${process.env.GATEWAY_CONTAINER_URL}/api/public/posts/${context?.query?.postId}`, { params: { countryPathFragment: context?.query?.countryPathFragment, themePathFragment: context?.query?.themePathFragment }});
             result = response.data;
-            console.log('-----------')
-            console.log(result)
         } catch(err) {
             isError = err !== undefined
         }

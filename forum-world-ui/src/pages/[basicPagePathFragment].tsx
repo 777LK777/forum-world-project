@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps<IBasicPageData | any> =
     let isError: boolean = false;
 
     try {
-        const response = await axios.get<IBasicPageData>(`${process.env.NEXT_PUBLIC_HOST}/api/public/basicPages/${query.basicPagePathFragment}`);
+        const response = await axios.get<IBasicPageData>(`${process.env.GATEWAY_CONTAINER_URL}/api/public/basicPages/${query.basicPagePathFragment}`);
         result = response.data;
     } catch(err) {
         isError = err !== undefined

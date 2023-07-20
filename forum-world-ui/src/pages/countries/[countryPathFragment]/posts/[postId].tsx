@@ -100,7 +100,7 @@ export const getServerSideProps: GetServerSideProps<ISuperPostPageData | any> =
     let isError: boolean = false;
 
     try {
-        const response = await axios.get<ISuperPostPageData>(`${process.env.NEXT_PUBLIC_HOST}/api/public/posts/super`, { params: { countryPathFragment: context?.query?.countryPathFragment, postId: context?.query?.postId }});
+        const response = await axios.get<ISuperPostPageData>(`${process.env.GATEWAY_CONTAINER_URL}/api/public/posts/super`, { params: { countryPathFragment: context?.query?.countryPathFragment, postId: context?.query?.postId }});
         result = response.data;
     } catch(err) {
         isError = err !== undefined

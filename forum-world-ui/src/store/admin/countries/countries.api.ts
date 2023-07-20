@@ -9,7 +9,7 @@ export const countriesApi = createApi({
     reducerPath: 'admin/countries/api',
     tagTypes: ["Country", "Content"],
     baseQuery: fetchBaseQuery({
-        baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api/admin/`
+        baseUrl: `${process.env.NEXT_PUBLIC_GATEWAY_ORIGIN}/admin/`
     }),
     endpoints: build => ({
         getAllCountries: build.query<ICountry[], void>({

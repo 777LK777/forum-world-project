@@ -59,7 +59,7 @@ export const getServerSideProps: GetServerSideProps<ICountryPageData | any> =
     let isError: boolean = false;
 
     try {
-        const response = await axios.get<ICountryPageData>(`${process.env.NEXT_PUBLIC_HOST}/api/public/countries/${query.countryPathFragment}`);
+        const response = await axios.get<ICountryPageData>(`${process.env.GATEWAY_CONTAINER_URL}/api/public/countries/${query.countryPathFragment}`);
         result = response.data;
     } catch(err) {
         isError = err !== undefined

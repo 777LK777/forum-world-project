@@ -9,6 +9,7 @@ export class PagesRepository {
     constructor(private readonly prismaService: PrismaService) { }
 
     async getHomePage(): Promise<HomePageDto> {
+        console.log("-------> getHomePage");
         const res = await this.prismaService.page.findFirst({
             select: {
                 name: true,
@@ -23,6 +24,7 @@ export class PagesRepository {
     }
 
     async getBasicPages(): Promise<BasicPageDto[]> {
+        console.log("-------> getBasicPages");
         const res = await this.prismaService.page.findMany({
             select: {
                 name: true,
@@ -37,6 +39,7 @@ export class PagesRepository {
     }
 
     async getBasicPageContentLink(basicPagePathFragment: string): Promise<PageContentLinkDto> {
+        console.log("-------> getBasicPageContentLink");
         const res = await this.prismaService.page.findFirst({
             select: {
                 pageId: true,

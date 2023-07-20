@@ -6,7 +6,7 @@ export default registerAs('startup', () => {
     return {
         origin: process.env.ORIGIN,
         port: process.env.PORT,
-        corsOrigin: process.env.CORS_ORIGIN,
-        corsPort: process.env.CORS_PORT
+        corsOriginUrl: process.env.CORS_ORIGIN_URL,
+        corsContainerOriginUrl: process.env.CORS_CONTAINER_ORIGIN_URL
     }
 })

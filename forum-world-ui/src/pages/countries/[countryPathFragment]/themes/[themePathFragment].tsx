@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps<IThemePageData | any> =
         let isError: boolean = false;
     
         try {
-            const response = await axios.get<IThemePageData>(`${process.env.NEXT_PUBLIC_HOST}/api/public/theme`, { params: { countryPathFragment: context?.query?.countryPathFragment, themePathFragment: context?.query?.themePathFragment }});
+            const response = await axios.get<IThemePageData>(`${process.env.GATEWAY_CONTAINER_URL}/api/public/theme`, { params: { countryPathFragment: context?.query?.countryPathFragment, themePathFragment: context?.query?.themePathFragment }});
             result = response.data;
         } catch(err) {
             isError = err !== undefined

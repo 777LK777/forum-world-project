@@ -18,6 +18,8 @@ export class PagesService {
     }
 
     async getBasicPageContentLink(basicPagePathFragment: string): Promise<PageContentLinkDto> {
+        console.log("-------> getBasicPageContentLink");
+        console.log(`basicPagePathFragment ${basicPagePathFragment}`);
         return await this.repository.getBasicPageContentLink(basicPagePathFragment);
     }
 }

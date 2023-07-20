@@ -6,7 +6,7 @@ export const pagesApi = createApi({
     reducerPath: 'admin/pages/api',
     tagTypes: ["Page"],
     baseQuery: fetchBaseQuery({
-        baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api/admin/`
+        baseUrl: `${process.env.NEXT_PUBLIC_GATEWAY_ORIGIN}/admin/`
     }),
     endpoints: build => ({
         getAllPages: build.query<IPage[], void>({

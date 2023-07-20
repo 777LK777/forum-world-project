@@ -6,7 +6,7 @@ export const themesApi = createApi({
     reducerPath: 'admin/themes/api',
     tagTypes: ["Theme"],
     baseQuery: fetchBaseQuery({
-        baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api/admin/`
+        baseUrl: `${process.env.NEXT_PUBLIC_GATEWAY_ORIGIN}/admin/`
     }),
     endpoints: build => ({
         getAllThemes: build.query<ITheme[], void>({

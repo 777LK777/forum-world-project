@@ -10,11 +10,14 @@ async function bootstrap() {
 
   const startupConfig = configService.get<IStartup>('startup');
 
-  console.log(`GATEWAY: ${startupConfig?.origin ?? "http://localhost"}:${startupConfig.port}`);
-  console.log(`CORS: ${startupConfig.corsOrigin}:${startupConfig.corsPort}`);
+  console.log("-----------")
+  console.log(startupConfig)
 
   app.enableCors({
-    origin: `${startupConfig.corsOrigin}:${startupConfig.corsPort}`
+    origin: [
+      `${startupConfig.corsOriginUrl}`,
+      `${startupConfig.corsContainerOriginUrl}`,
+    ]
   });
 
   if (!startupConfig?.origin) app.listen(startupConfig.port);

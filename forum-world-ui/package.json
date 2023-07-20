@@ -28,6 +28,7 @@
     "editorjs-break-line": "^1.0.9",
     "editorjs-html": "^3.4.2",
     "next": "13.3.0",
+    "next-auth": "^4.22.1",
     "normalize.css": "^8.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
